@@ -17,8 +17,7 @@ const Board = props => {
    
    window.addEventListener('resize',()=>{
     const canvas = document.querySelector('.canvas')
-    canvas.height = window.innerHeight-5;
-    canvas.width = window.innerWidth-5
+   fixHeight(canvas)
    })
 
    let drawing = false
@@ -41,18 +40,38 @@ const Board = props => {
        ctx.lineCap = 'round'
        ctx.lineTo(e.clientX,e.clientY)
        ctx.stroke()
-       ctx.beginPath();
-       ctx.moveTo(e.clientX,e.clientY)
+      
 
    }
+   const erase = (e) => {
+    const canvas = document.querySelector('.canvas')
+    const ctx = canvas.getContext("2d");
+    ctx.strokeStyle = 'red'
+    ctx.lineWidth = 100
+    ctx.lineCap = 'square'
+    ctx.beginPath()
+    ctx.lineTo(e.clientX,e.clientY)
+       ctx.stroke()
+    
+    
+   }
     return(
-        <canvas className='canvas'
-        onMouseMove={draw}
-        onMouseDown={startDrawing}
-        onMouseUp={finishDrawing} 
-        >
+        
+                <div>
+                <button onClick={erase}></button>
+                <canvas className='canvas'
+                onMouseMove={draw}
+                onMouseDown={startDrawing}
+                onMouseUp={finishDrawing} 
+                ></canvas>
 
-        </canvas>
+
+
+                </div>
+               
+               
+
+       
     )
 }
 
