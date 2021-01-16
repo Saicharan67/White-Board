@@ -3,11 +3,40 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+.root {
+  position: relative;
+}
+.sidebar {
+  z-index: 10;
+  margin-top: 17em;
+  width: 5rem;
+  height: 15rem;
+  background-color: rgb(2, 2, 2);
+  position: absolute;
+}
+.penciloptions {
+  display: none;
+  z-index: 10;
+  margin-top: 17em;
+  margin-left: 6rem;
+  width: 5rem;
+  height: 15rem;
+  background-color: rgb(218, 210, 210);
+  position: absolute;
+}
+.eraser {
+  color: black;
+  margin: 0.5rem;
+  height: 1.5rem;
+  width: 4rem;
+  background-color: yellow;
+}
 .canvas {
-  border: 2px solid black;
-  display: flex;
-  justify-content: center;
+  position: absolute;
+  border: 2px solid rgb(255, 255, 255);
+  height: 99.5vh;
+  width: 99.5vw;
+  cursor: pointer;
 }
 button {
   width: 20px;
