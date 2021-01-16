@@ -4,10 +4,11 @@ import React, { useEffect, useState } from 'react';
 import  './style.css'
 
 const Board = props => {
-
+    const Colors = ['black','blue','red','green','yellow']
     let canvas,ctx,features1
     const [drawing , setdrawing] = useState(false) 
     const [color ,setcolor] = useState('black')
+    const [inputlinewidth,setinputlinewidht]=useState('3')
     const [linewidth,setlinewidth] = useState(2)
     const fixHeight = (canvas) =>{
         canvas.height = window.innerHeight-5;
@@ -52,16 +53,19 @@ const Board = props => {
     
    }
    const erase = (e) => {
-   
+    document.getElementsByClassName("canvas")[0].style.cursor = "pointer"
     setcolor('white')
+    
     setlinewidth(50)
     
     
    }
    const pencil = (e) => {
-    features1.display = "inline"
-    setcolor('black')
-    setlinewidth(2)
+    document.getElementsByClassName("canvas")[0].style.cursor = "crosshair"
+    features1.display = "flex"
+  
+   
+   
     
     
    }
@@ -71,12 +75,20 @@ const Board = props => {
     ctx.strokeStyle = "red";
     ctx.rect(500, 300, 290, 140);
     ctx.stroke();
+    ctx.beginPath();
    }
 
-   const chooseColor = () => {
+   const chooseColor = (clr) => {
        
+        setcolor(clr)
+        setlinewidth(inputlinewidth)
+        features1.display="none"
+   } 
+   const setline = (e) => {
+       setinputlinewidht(e.target.value)
+       setlinewidth(e.target.value)
+      
    }
-
 
 
     
@@ -99,9 +111,18 @@ const Board = props => {
 
                </div>
                <div className="penciloptions">
-                   <button className = 'eraser' onClick={chooseColor}>
-                      black
-                   </button>
+                 <div>
+                 {Colors.map((clr)=>{
+                      return(
+                        <button key={clr} className = 'eraser' onClick={()=>chooseColor(clr)}>
+                        {clr}
+                     </button>
+                      )
+                  })}
+                 </div>
+                 <div>
+                     <input type="range" min="1" max = "10" defaultValue={linewidth} value={linewidth} onChange={setline}></input>
+                 </div>
                </div>
                <div>
 
