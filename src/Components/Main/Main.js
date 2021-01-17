@@ -97,8 +97,9 @@ const Board = props => {
    
     return(
         
-                <div className='root'>
-                 <div className='sidebar'>
+         <div className='root'>
+            <div className = 'sidebar'>
+            <div className='sidebar'>
                    <button className = 'eraser' onClick={erase}>
                        Earser
                    </button>
@@ -124,14 +125,16 @@ const Board = props => {
                      <input type="range" min="1" max = "10" defaultValue={linewidth} value={linewidth} onChange={setline}></input>
                  </div>
                </div>
-               <div>
+            </div>
+            
+            <div>
 
-               <canvas className="canvas"
-                onMouseDown={startDrawing}
-                onMouseUp={finishDrawing}
-                onMouseMove={draw}
-                >  </canvas>
-               </div>
+            <canvas className="canvas"
+            onMouseDown={startDrawing}
+            onMouseUp={finishDrawing}
+            onMouseMove={draw}
+            >  </canvas>
+            </div>
                 
                 
 
@@ -139,7 +142,7 @@ const Board = props => {
 
 
 
-                </div>
+     </div>
                
                
 
