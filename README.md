@@ -1,5 +1,5 @@
 ## White-Board
-This is a Project to develope a Simple and Smooth White-Board to use Online..
+This is a Project to develope a Simple and User Friendly White-Board to use Online..
 
 
 # Getting Started with Create React App
