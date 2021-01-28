@@ -85,6 +85,14 @@ const Board = props => {
     ctx.stroke();
     ctx.beginPath();
    }
+   const Circle = () => {
+    ctx.beginPath();
+    ctx.lineWidth = "6";
+    ctx.strokeStyle = "red";
+    ctx.arc(500, 300, 200, 0, 2 * Math.PI, false);
+    ctx.stroke();
+    ctx.beginPath();
+   }
 
    const chooseColor = (clr) => {
        
@@ -119,6 +127,9 @@ const Board = props => {
                    </button>
                    <button className = 'eraser' onClick={square}>
                       square
+                   </button>
+                    <button className = 'eraser' onClick={Circle}>
+                    Circle
                    </button>
 
                </div>
