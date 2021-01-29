@@ -31,7 +31,7 @@ const Board = props => {
     })
     
     const startDrawing = (e) => {
-        features1.display = "none"
+       
         setdrawing(true)
         draw(e)
        
@@ -62,7 +62,7 @@ const Board = props => {
    }
    const pencil = (e) => {
     document.getElementsByClassName("canvas")[0].style.cursor = "crosshair"
-    features1.display = "flex"
+   
   
    
    
@@ -70,35 +70,61 @@ const Board = props => {
     
    }
    const rectangle = () => {
-    ctx.beginPath();
-    ctx.lineWidth = "6";
-    ctx.strokeStyle = "red";
-    ctx.rect(500, 300, 290, 140);
-    ctx.stroke();
-    ctx.beginPath();
+    let xPlace=100;
+    let yPlace=130;
+    document.getElementsByClassName('canvas')[0].addEventListener('click',(event)=>{
+        xPlace = event.clientX
+        yPlace = event.clientY
+        ctx.beginPath();
+        ctx.lineWidth = "6";
+        ctx.strokeStyle = color;
+        ctx.rect(xPlace, yPlace, 300, 150);
+        ctx.stroke();
+        ctx.beginPath();
+       
+      
+},{once:true})
    }
    const square = () => {
-    ctx.beginPath();
-    ctx.lineWidth = "6";
-    ctx.strokeStyle = "red";
-    ctx.rect(500, 300, 200, 200);
-    ctx.stroke();
-    ctx.beginPath();
+    let xPlace=100;
+    let yPlace=130;
+    document.getElementsByClassName('canvas')[0].addEventListener('click',(event)=>{
+        xPlace = event.clientX
+        yPlace = event.clientY
+        ctx.beginPath();
+        ctx.lineWidth = "6";
+        ctx.strokeStyle = color;
+        ctx.rect(xPlace, yPlace, 200, 200);
+        ctx.stroke();
+        ctx.beginPath();
+       
+      
+},{once:true})
+   
    }
    const Circle = () => {
-    ctx.beginPath();
-    ctx.lineWidth = "6";
-    ctx.strokeStyle = "red";
-    ctx.arc(500, 300, 200, 0, 2 * Math.PI, false);
-    ctx.stroke();
-    ctx.beginPath();
+    let xPlace=100;
+    let yPlace=130;
+    document.getElementsByClassName('canvas')[0].addEventListener('click',(event)=>{
+                      xPlace = event.clientX
+                      yPlace = event.clientY
+                      console.log(xPlace,yPlace)
+                      ctx.beginPath();
+                        ctx.lineWidth = "6";
+                        ctx.strokeStyle = color;
+                        ctx.arc(xPlace, yPlace, 200, 0, 2 * Math.PI, false);
+                        ctx.stroke();
+                        ctx.beginPath();
+                    
+    },{once:true})
+    
    }
 
    const chooseColor = (clr) => {
        
         setcolor(clr)
         setlinewidth(inputlinewidth)
-        features1.display="none"
+      
    } 
    const setline = (e) => {
        setinputlinewidht(e.target.value)
@@ -114,8 +140,9 @@ const Board = props => {
     return(
         
          <div className='root'>
-            <div className = 'sidebar'>
-            <div className='sidebar'>
+           
+            <div>
+                <div  className='sidebar'>
                    <button className = 'eraser' onClick={erase}>
                        Earser
                    </button>
@@ -131,9 +158,8 @@ const Board = props => {
                     <button className = 'eraser' onClick={Circle}>
                     Circle
                    </button>
-
-               </div>
-               <div className="penciloptions">
+                </div>
+                <div className="penciloptions">
                  <div>
                  {Colors.map((clr)=>{
                       return(
@@ -147,7 +173,10 @@ const Board = props => {
                      <input type="range" min="1" max = "10" defaultValue={linewidth} value={linewidth} onChange={setline}></input>
                  </div>
                </div>
+
             </div>
+               
+          
             
             <div>
 
