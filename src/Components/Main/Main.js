@@ -76,7 +76,7 @@ const Board = props => {
         xPlace = event.clientX
         yPlace = event.clientY
         ctx.beginPath();
-        ctx.lineWidth = "6";
+        ctx.lineWidth = linewidth;
         ctx.strokeStyle = color;
         ctx.rect(xPlace, yPlace, 300, 150);
         ctx.stroke();
@@ -92,7 +92,7 @@ const Board = props => {
         xPlace = event.clientX
         yPlace = event.clientY
         ctx.beginPath();
-        ctx.lineWidth = "6";
+        ctx.lineWidth = linewidth;
         ctx.strokeStyle = color;
         ctx.rect(xPlace, yPlace, 200, 200);
         ctx.stroke();
@@ -110,7 +110,7 @@ const Board = props => {
                       yPlace = event.clientY
                       console.log(xPlace,yPlace)
                       ctx.beginPath();
-                        ctx.lineWidth = "6";
+                        ctx.lineWidth = linewidth;
                         ctx.strokeStyle = color;
                         ctx.arc(xPlace, yPlace, 200, 0, 2 * Math.PI, false);
                         ctx.stroke();
