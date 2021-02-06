@@ -1,10 +1,6 @@
-
-
 import React, { useEffect, useState } from 'react';
-
-import ReactDOM from 'react-dom';
 import  './style.css'
-
+import $ from 'jquery'
 const Board = props => {
     const Colors = ['black','blue','red','green','yellow']
     let canvas,ctx,features1
@@ -14,119 +10,26 @@ const Board = props => {
     const [linewidth,setlinewidth] = useState(2)
    
     const [state,setstate] = useState('pencil')
-    // const fixHeight = (canvas) =>{
-    //     canvas.height = window.innerHeight-5;
-    //     canvas.width = window.innerWidth-5
-    // }
+    const fixHeight = (canvas) =>{
+        canvas.height = window.innerHeight-5;
+        canvas.width = window.innerWidth-5
+    }
    
     useEffect(()=>{
-        // features1 = document.getElementsByClassName("penciloptions")[0].style;
-
+        features1 = document.getElementsByClassName("penciloptions")[0].style;
        
-        // canvas = document.getElementsByClassName("canvas")[0];
-        // ctx  = canvas.getContext('2d')
+        canvas = document.getElementsByClassName("canvas")[0];
+        ctx  = canvas.getContext('2d')
         
-        // window.addEventListener('load',()=>{
-        //  fixHeight(canvas)
-        // })
-        // window.addEventListener('resize',()=>{
-        //     fixHeight(canvas)
-        // })
+        window.addEventListener('load',()=>{
+         fixHeight(canvas)
+        })
+        window.addEventListener('resize',()=>{
+            fixHeight(canvas)
+        })
 
-    })
-    useEffect(()=>{
-      var tool;
-             canvas = document.getElementsByClassName("canvas")[0];
-             ctx = canvas.getContext('2d');
-            
-            var history = {
-              redo_list: [],
-              undo_list: [],
-              saveState: function(canvas, list, keep_redo) {
-                keep_redo = keep_redo || false;
-                if(!keep_redo) {
-                  this.redo_list = [];
-                }
-                
-                (list || this.undo_list).push(canvas.toDataURL());   
-              },
-              undo: function(canvas, ctx) {
-                this.restoreState(canvas, ctx, this.undo_list, this.redo_list);
-              },
-              redo: function(canvas, ctx) {
-                this.restoreState(canvas, ctx, this.redo_list, this.undo_list);
-              },
-              restoreState: function(canvas, ctx,  po, push) {
-                console.log('undo_list',this.undo_list)
-                if(po.length) {
-                  this.saveState(canvas, push, true);
-                  var restore_state = po.pop();
-                  var img = React.createElement('img', {'src':restore_state});
-                  console.log('img',img)
-                    ctx.clearRect(0, 0, 600, 400);
-                   // ctx.drawImage(this.undo_list[0], 0, 0, 600, 400, 0, 0, 600, 400);  
-                  
-                }
-              }
-            }
-            
-            var pencil = {
-              options: {
-                stroke_color: ['00', '00', '00'],
-                dim: 4
-              },
-              init: function(canvas, ctx) {
-                console.log(canvas)
-                this.canvas = canvas;
-                //this.canvas_coords = this.canvas.getBoundingClientRect();
-                this.ctx = ctx;
-                this.ctx.strokeColor = this.options.stroke_color;
-                this.drawing = false;
-                this.addCanvasEvents();
-              },
-              addCanvasEvents: function() {
-                this.canvas.addEventListener('mousedown', this.start.bind(this));
-                this.canvas.addEventListener('mousemove', this.stroke.bind(this));
-                this.canvas.addEventListener('mouseup', this.stop.bind(this));
-                this.canvas.addEventListener('mouseout', this.stop.bind(this));
-              },
-              start: function(evt) {
-                console.log(evt)
-                var x = evt.pageX  
-                var y = evt.pageY 
-                this.ctx.moveTo(x, y);
-                history.saveState(this.canvas);
-                this.drawing = true;
-              },
-              stroke: function(evt) {
-                if(this.drawing) {
-                  var x = evt.pageX 
-                  var y = evt.pageY
-                  this.ctx.lineTo(x, y);
-                  this.ctx.stroke();
-                  
-                }
-              },
-              stop: function(evt) {
-                if(this.drawing) this.drawing = false;
-              }
-            };
-            
-            document.getElementById('pencil').addEventListener('click', function() {
-              pencil.init(canvas, ctx);
-              //console.log('pencile comd')
-            });
-            
-            document.getElementById('undo').addEventListener('click', function() {
-              history.undo(canvas, ctx);
-              console.log('undo-list',history.undo_list)
-            });
-            
-            document.getElementById('redo').addEventListener('click', function() {
-              history.redo(canvas, ctx);
-            });
+        
           
-            
     })
     
     const startDrawing = (e) => {
@@ -249,10 +152,7 @@ const Board = props => {
                    <button className = 'eraser' onClick={erase}>
                        Earser
                    </button>
-                   {/* <button className = 'eraser' id="pencil" onClick={pencil}>
-                      pencil
-                   </button> */}
-                   <button className = 'eraser' id="pencil" >
+                   <button className = 'eraser' id="pencil" onClick={pencil}>
                       pencil
                    </button>
                    <button className = 'eraser' id="undo" >
@@ -301,9 +201,9 @@ const Board = props => {
             <div>
 
             <canvas className="canvas"
-            // onMouseDown={startDrawing}
-            // onMouseUp={finishDrawing}
-            // onMouseMove={draw}
+            onMouseDown={startDrawing}
+            onMouseUp={finishDrawing}
+            onMouseMove={draw}
             >  </canvas>
             </div>
                 
