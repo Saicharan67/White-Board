@@ -33,13 +33,13 @@
   width: 4rem;
   background-color: yellow;
 }
-/* .canvas {
+.canvas {
   position: absolute;
   border: 2px solid rgb(255, 255, 255);
   height: 99.5vh;
   width: 99.5vw;
   cursor: crosshair;
-} */
+}
 button {
   width: 20px;
   height: 20px;
