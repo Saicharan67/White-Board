@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import  './style.css'
-import $ from 'jquery'
+
 const Board = props => {
     const Colors = ['black','blue','red','green','yellow']
-    let canvas,ctx,features1
+    let canvas,ctx,features1,history
     const [drawing , setdrawing] = useState(false) 
     const [color ,setcolor] = useState('black')
     const [eraserlinewidth,seteraserlinewidht]=useState('10')
     const [linewidth,setlinewidth] = useState(2)
-   
+    const  [redo_list,set_redo] = useState([])
+    const  [undo_list,set_undo] = useState([])
     const [state,setstate] = useState('pencil')
     const fixHeight = (canvas) =>{
         canvas.height = window.innerHeight-5;
@@ -23,19 +24,62 @@ const Board = props => {
         
         window.addEventListener('load',()=>{
          fixHeight(canvas)
+         set_redo([])
+         set_undo([])
         })
         window.addEventListener('resize',()=>{
             fixHeight(canvas)
         })
-
-        
+         history = {
+           
+            saveState: function(canvas, list, keep_redo) {
+              keep_redo = keep_redo || false;
+              if(!keep_redo) {
+                set_redo([]);
+              }
+              
+              
+            
+              set_undo(undo_list=>[...undo_list,canvas.toDataURL()])  // this line has changed check before u suck
+              console.log('savestate',undo_list,undo_list.length)  
+            },
+            undo: function(canvas, ctx) {
+                console.log('undo calling',this.undo_list,this.redo_list)
+              this.restoreState(canvas, ctx, undo_list, redo_list);
+            },
+            redo: function(canvas, ctx) {
+              this.restoreState(canvas, ctx, redo_list, undo_list);
+            },
+            restoreState: function(canvas, ctx,  po, pus) {
+               
+              if(po.length) {
+                console.log('coming')
+                this.saveState(canvas, pus, true);
+                var restore_state = po.pop();
+                //var img = React.createElement('img', {'src':restore_state});
+                const YourComponent = ({restore_state}) => <img src={restore_state} alt="foo" />
+                // img.onload = function() {
+                //   ctx.clearRect();
+                //   //ctx.drawImage(img, 0, 0, 1200, 900, 0, 0, 1200, 900);  
+                // }
+             
+                ctx.drawImage(YourComponent(), 0, 0, 1200, 900, 0, 0, 1200, 900);
+              }
+            }
+        }
           
     })
     
-    const startDrawing = (e) => {
+    const startDrawing = (evt) => {
        
         setdrawing(true)
-        draw(e)
+        history.saveState(canvas);
+        console.log(canvas)
+        draw(evt)
+        
+       
+       
+         
        
     }
     const finishDrawing = () => {
@@ -45,6 +89,7 @@ const Board = props => {
     const draw = (e) => {
     
        if(!drawing) return;
+      
        ctx.lineWidth = state!='pencil'?eraserlinewidth:linewidth;
        ctx.lineCap = 'round'
        ctx.strokeStyle=state!='pencil'?'white':color
@@ -155,10 +200,14 @@ const Board = props => {
                    <button className = 'eraser' id="pencil" onClick={pencil}>
                       pencil
                    </button>
-                   <button className = 'eraser' id="undo" >
+                   <button className = 'eraser' id="undo" onClick={()=>{
+                       history.undo(canvas, ctx);
+                   }}>
                       undo
                    </button>
-                   <button className = 'eraser' id="redo">
+                   <button className = 'eraser' id="redo" onClick={()=>{
+                        history.redo(canvas, ctx);
+                   }}>
                       redo
                    </button>
                    <button className = 'eraser' onClick={rectangle}>
