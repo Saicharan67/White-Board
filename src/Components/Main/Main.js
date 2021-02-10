@@ -38,36 +38,58 @@ const Board = props => {
                 set_redo([]);
               }
               
-              
+              if (list){
+                     if (list.name=='undo'){
+                        set_undo(undo_list=>[...undo_list,canvas.toDataURL()]) 
+                     }
+                     else{
+                        set_redo(redo_list=>[...redo_list,canvas.toDataURL()]) 
+                     }
+
+
+              }
+              else{
+                
+                set_undo(undo_list=>[...undo_list,canvas.toDataURL()]) 
+               // console.log('savestate',undo_list,undo_list.length)  
             
-              set_undo(undo_list=>[...undo_list,canvas.toDataURL()])  // this line has changed check before u suck
-              console.log('savestate',undo_list,undo_list.length)  
+            }
+            
+             
             },
             undo: function(canvas, ctx) {
-                console.log('undo calling',this.undo_list,this.redo_list)
-              this.restoreState(canvas, ctx, undo_list, redo_list);
+                //console.log('undo calling',undo_list,redo_list)
+              this.restoreState(canvas, ctx, {name:'undo',list:undo_list}, {name:'redo',list:redo_list});
             },
             redo: function(canvas, ctx) {
-              this.restoreState(canvas, ctx, redo_list, undo_list);
+               // console.log('redo calling',undo_list,redo_list)
+                this.restoreState(canvas, ctx,  {name:'redo',list:redo_list},{name:'undo',list:undo_list});
             },
-            restoreState: function(canvas, ctx,  po, pus) {
+            restoreState: function(canvas, ctx,  poping, pushing) {
                
-              if(po.length) {
-                console.log('coming')
-                this.saveState(canvas, pus, true);
-                var restore_state = po.pop();
-                //var img = React.createElement('img', {'src':restore_state});
-                const YourComponent = ({restore_state}) => <img src={restore_state} alt="foo" />
-                // img.onload = function() {
-                //   ctx.clearRect();
-                //   //ctx.drawImage(img, 0, 0, 1200, 900, 0, 0, 1200, 900);  
-                // }
-             
-                ctx.drawImage(YourComponent(), 0, 0, 1200, 900, 0, 0, 1200, 900);
+              if(poping.list.length) {
+            
+                this.saveState(canvas, pushing, true);
+               
+                var restore_state = poping.list.pop();
+           
+                var temp_list = poping.list
+                if(poping.name=='undo'){
+                    set_undo(temp_list =>[...temp_list]) 
+                }
+                else{
+                    set_redo(temp_list =>[...temp_list])  
+                }
+                var imageObj1 = new Image();
+                imageObj1.src = restore_state
+                imageObj1.onload = function() {
+                 ctx.clearRect(0, 0, 1200, 900);
+                 ctx.drawImage(imageObj1,0,0,1200, 900, 0, 0, 1200, 900);
+                
               }
             }
         }
-          
+    }
     })
     
     const startDrawing = (evt) => {
