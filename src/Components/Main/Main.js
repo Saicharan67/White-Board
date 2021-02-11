@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import  './style.css'
 
-const Board = props => {
+const Board = () => {
     const Colors = ['black','blue','red','green','yellow']
     let canvas,ctx,features1,history
     const [drawing , setdrawing] = useState(false) 
@@ -15,7 +15,60 @@ const Board = props => {
         canvas.height = window.innerHeight-5;
         canvas.width = window.innerWidth-5
     }
+    const saveState = (canvas , list ,keep_redo) => {
+        keep_redo = keep_redo || false;
+        if(!keep_redo) {
+          set_redo([]);
+        }       
+        if (list){
+               if (list.name=='undo'){
+                  set_undo(undo_list=>[...undo_list,canvas.toDataURL()]) 
+               }
+               else{
+                  set_redo(redo_list=>[...redo_list,canvas.toDataURL()]) 
+               }
+        }
+        else{         
+          set_undo(undo_list=>[...undo_list,canvas.toDataURL()])       
+      }     
+    }
+
+    const undo = (canvas , ctx) => {
+        restoreState(canvas, ctx, {name:'undo',list:undo_list}, {name:'redo',list:redo_list});
+    }
    
+
+
+    const redo = (canvas , ctx) => {
+        restoreState(canvas, ctx,  {name:'redo',list:redo_list},{name:'undo',list:undo_list});
+
+    }
+
+    const restoreState = (canvas, ctx,  poping, pushing) => {
+
+        if(poping.list.length) {
+            
+            saveState(canvas, pushing, true);
+           
+            var restore_state = poping.list.pop();
+       
+            var temp_list = poping.list
+            if(poping.name=='undo'){
+                set_undo([...temp_list]) 
+            }
+            else{
+                set_redo([...temp_list])  
+            }
+            var imageObj1 = new Image();
+            imageObj1.src = restore_state
+            imageObj1.onload = function() {
+             ctx.clearRect(0, 0, 1300, 900);
+             ctx.drawImage(imageObj1,0,0,1300, 900, 0, 0, 1300, 900);
+            
+             }
+
+        }
+    }
     useEffect(()=>{
         features1 = document.getElementsByClassName("penciloptions")[0].style;
        
@@ -30,72 +83,13 @@ const Board = props => {
         window.addEventListener('resize',()=>{
             fixHeight(canvas)
         })
-         history = {
-           
-            saveState: function(canvas, list, keep_redo) {
-              keep_redo = keep_redo || false;
-              if(!keep_redo) {
-                set_redo([]);
-              }
-              
-              if (list){
-                     if (list.name=='undo'){
-                        set_undo(undo_list=>[...undo_list,canvas.toDataURL()]) 
-                     }
-                     else{
-                        set_redo(redo_list=>[...redo_list,canvas.toDataURL()]) 
-                     }
-
-
-              }
-              else{
-                
-                set_undo(undo_list=>[...undo_list,canvas.toDataURL()]) 
-               // console.log('savestate',undo_list,undo_list.length)  
-            
-            }
-            
-             
-            },
-            undo: function(canvas, ctx) {
-                //console.log('undo calling',undo_list,redo_list)
-              this.restoreState(canvas, ctx, {name:'undo',list:undo_list}, {name:'redo',list:redo_list});
-            },
-            redo: function(canvas, ctx) {
-               // console.log('redo calling',undo_list,redo_list)
-                this.restoreState(canvas, ctx,  {name:'redo',list:redo_list},{name:'undo',list:undo_list});
-            },
-            restoreState: function(canvas, ctx,  poping, pushing) {
-               
-              if(poping.list.length) {
-            
-                this.saveState(canvas, pushing, true);
-               
-                var restore_state = poping.list.pop();
-           
-                var temp_list = poping.list
-                if(poping.name=='undo'){
-                    set_undo(temp_list =>[...temp_list]) 
-                }
-                else{
-                    set_redo(temp_list =>[...temp_list])  
-                }
-                var imageObj1 = new Image();
-                imageObj1.src = restore_state
-                imageObj1.onload = function() {
-                 ctx.clearRect(0, 0, 1200, 900);
-                 ctx.drawImage(imageObj1,0,0,1200, 900, 0, 0, 1200, 900);
-                
-              }
-            }
-        }
-    }
+       
     })
     
     const startDrawing = (evt) => {
        
         setdrawing(true)
-        history.saveState(canvas);
+        saveState(canvas);
         console.log(canvas)
         draw(evt)
         
@@ -223,12 +217,12 @@ const Board = props => {
                       pencil
                    </button>
                    <button className = 'eraser' id="undo" onClick={()=>{
-                       history.undo(canvas, ctx);
+                       undo(canvas, ctx);
                    }}>
                       undo
                    </button>
                    <button className = 'eraser' id="redo" onClick={()=>{
-                        history.redo(canvas, ctx);
+                        redo(canvas, ctx);
                    }}>
                       redo
                    </button>
