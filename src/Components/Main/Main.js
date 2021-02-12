@@ -3,7 +3,7 @@ import  './style.css'
 
 const Board = () => {
     const Colors = ['black','blue','red','green','yellow']
-    let canvas,ctx,features1,history
+    let canvas,ctx,features1;
     const [drawing , setdrawing] = useState(false) 
     const [color ,setcolor] = useState('black')
     const [eraserlinewidth,seteraserlinewidht]=useState('10')
@@ -11,6 +11,23 @@ const Board = () => {
     const  [redo_list,set_redo] = useState([])
     const  [undo_list,set_undo] = useState([])
     const [state,setstate] = useState('pencil')
+
+    useEffect(()=>{
+        features1 = document.getElementsByClassName("penciloptions")[0].style;
+       
+        canvas = document.getElementsByClassName("canvas")[0];
+        ctx  = canvas.getContext('2d')
+        
+        window.addEventListener('load',()=>{
+         fixHeight(canvas)
+         set_redo([])
+         set_undo([])
+        })
+        window.addEventListener('resize',()=>{
+            fixHeight(canvas)
+        })
+       
+    })
     const fixHeight = (canvas) =>{
         canvas.height = window.innerHeight-5;
         canvas.width = window.innerWidth-5
@@ -69,67 +86,43 @@ const Board = () => {
 
         }
     }
-    useEffect(()=>{
-        features1 = document.getElementsByClassName("penciloptions")[0].style;
-       
+    const draw = (e) => {
+    
+        if(!drawing) return;
         canvas = document.getElementsByClassName("canvas")[0];
         ctx  = canvas.getContext('2d')
-        
-        window.addEventListener('load',()=>{
-         fixHeight(canvas)
-         set_redo([])
-         set_undo([])
-        })
-        window.addEventListener('resize',()=>{
-            fixHeight(canvas)
-        })
-       
-    })
-    
+        ctx.lineWidth = state!='pencil'?eraserlinewidth:linewidth;
+        ctx.lineCap = 'round'
+        ctx.strokeStyle=state!='pencil'?'white':color
+        ctx.lineTo(e.clientX,e.clientY)
+        ctx.stroke()
+        ctx.beginPath()
+        ctx.moveTo(e.clientX,e.clientY)
+     
+    }
+
     const startDrawing = (evt) => {
        
         setdrawing(true)
         saveState(canvas);
         console.log(canvas)
         draw(evt)
-        
-       
-       
-         
-       
+    
     }
     const finishDrawing = () => {
         setdrawing(false)
         ctx.beginPath()
     }
-    const draw = (e) => {
     
-       if(!drawing) return;
-      
-       ctx.lineWidth = state!='pencil'?eraserlinewidth:linewidth;
-       ctx.lineCap = 'round'
-       ctx.strokeStyle=state!='pencil'?'white':color
-       ctx.lineTo(e.clientX,e.clientY)
-       ctx.stroke()
-       ctx.beginPath()
-       ctx.moveTo(e.clientX,e.clientY)
-    
-   }
    const erase = (e) => {
     setstate('erase')
     document.getElementsByClassName("canvas")[0].style.cursor = "pointer"
    
-    
-    
-    
-    
-    
    }
    const pencil = (e) => {
     setstate('pencil')
     document.getElementsByClassName("canvas")[0].style.cursor = "crosshair"
 
-    
    }
    const rectangle = () => {
     setstate('pencil')
@@ -146,7 +139,7 @@ const Board = () => {
         ctx.beginPath();
        
       
-},{once:true})
+      },{once:true})
    }
    const square = () => {
     setstate('pencil')
@@ -163,7 +156,7 @@ const Board = () => {
         ctx.beginPath();
        
       
-},{once:true})
+   },{once:true})
    
    }
    const Circle = () => {
@@ -186,9 +179,8 @@ const Board = () => {
    }
 
    const chooseColor = (clr) => {
-       
-        setcolor(clr)
-        
+
+         setcolor(clr)
       
    } 
    const setline = (e) => {
@@ -200,10 +192,6 @@ const Board = () => {
        seteraserlinewidht(e.target.value)
    }
 
-    
-   
-    
-   
     return(
         
          <div className='root'>
