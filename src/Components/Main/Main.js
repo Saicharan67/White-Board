@@ -26,6 +26,17 @@ const Board = () => {
         window.addEventListener('resize',()=>{
             fixHeight(canvas)
         })
+        window.addEventListener('keypress', function(event) {
+            if (event.ctrlKey) {
+                if (event.kry === 'z') {
+                      console.log('ctrl+z')
+                }
+            }
+            // if (event.ctrlKey && event.key === 'y') {
+            //         //   () =>  redo(canvas, ctx);
+            //     }
+          });
+       
        
     })
     const fixHeight = (canvas) =>{
