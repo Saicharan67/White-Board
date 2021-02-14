@@ -232,6 +232,13 @@ const Board = () => {
     
 
    }
+   const download = () => {
+    var download = document.getElementsByClassName("download")[0];
+    var image = canvas.toDataURL("image/png")
+        .replace("image/png", "image/octet-stream");
+    download.setAttribute("href", image);
+    //download.setAttribute("download","archive.png");
+    }
 
     return(
         
@@ -242,6 +249,9 @@ const Board = () => {
                    <button className = 'eraser' onClick={erase}>
                        Earser
                    </button>
+                   <a className="download" download="canvas.png">
+                    <button className='eraser' type="button" onClick={download}>Download</button>
+                    </a>
                    <button className = 'eraser' id="pencil" onClick={pencil}>
                       pencil
                    </button>
