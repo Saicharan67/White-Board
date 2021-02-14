@@ -20,22 +20,34 @@ const Board = () => {
         
         window.addEventListener('load',()=>{
          fixHeight(canvas)
+         var prevState = JSON.parse(localStorage.getItem("Canvas"));
+         console.log(prevState)
+         var imageObj = new Image();
+         imageObj.src = prevState
+         imageObj.onload = function() {
+          ctx.clearRect(0, 0, 1300, 900);
+          ctx.drawImage(imageObj,0,0,1300, 900, 0, 0, 1300, 900);
+          }
          set_redo([])
-         set_undo([])
+        //  var prevUndo = JSON.parse(localStorage.getItem("undo_list"))
+        //  set_undo([prevUndo])
+        //  console.log(prevUndo,typeof(prevUndo))
+        set_undo([])
+         
         })
         window.addEventListener('resize',()=>{
             fixHeight(canvas)
+            var prevState = JSON.parse(localStorage.getItem("Canvas"));
+            console.log(prevState)
+            var imageObj = new Image();
+            imageObj.src = prevState
+            imageObj.onload = function() {
+             ctx.clearRect(0, 0, 1300, 900);
+             ctx.drawImage(imageObj,0,0,1300, 900, 0, 0, 1300, 900);
+            
+             }
         })
-        window.addEventListener('keypress', function(event) {
-            if (event.ctrlKey) {
-                if (event.kry === 'z') {
-                      console.log('ctrl+z')
-                }
-            }
-            // if (event.ctrlKey && event.key === 'y') {
-            //         //   () =>  redo(canvas, ctx);
-            //     }
-          });
+       
        
        
     })
@@ -59,6 +71,7 @@ const Board = () => {
         else{         
           set_undo(undo_list=>[...undo_list,canvas.toDataURL()])       
       }     
+      console.log(undo_list.length,redo_list.length)
     }
 
     const undo = (canvas , ctx) => {
@@ -90,8 +103,8 @@ const Board = () => {
             var imageObj1 = new Image();
             imageObj1.src = restore_state
             imageObj1.onload = function() {
-             ctx.clearRect(0, 0, 1300, 900);
-             ctx.drawImage(imageObj1,0,0,1300, 900, 0, 0, 1300, 900);
+             ctx.clearRect(0, 0, 1900, 1000);
+             ctx.drawImage(imageObj1,0,0,1900, 1000, 0, 0, 1900, 1000);
             
              }
 
@@ -117,12 +130,16 @@ const Board = () => {
         setdrawing(true)
         saveState(canvas);
         console.log(canvas)
+        localStorage.setItem("undo_list", JSON.stringify(undo_list));
         draw(evt)
+       
     
     }
     const finishDrawing = () => {
         setdrawing(false)
         ctx.beginPath()
+        localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
+        
     }
     
    const erase = (e) => {
@@ -177,7 +194,7 @@ const Board = () => {
     document.getElementsByClassName('canvas')[0].addEventListener('click',(event)=>{
                     xPlace = event.clientX
                     yPlace = event.clientY
-                    console.log(xPlace,yPlace)
+              
                     ctx.beginPath();
                     ctx.lineWidth = linewidth;
                     ctx.strokeStyle = color;
@@ -202,6 +219,19 @@ const Board = () => {
    const seteraserline = (e) => {
        seteraserlinewidht(e.target.value)
    }
+   const callundo = ()=>{
+    undo(canvas, ctx);
+   }
+   const callredo = ()=>{
+    redo(canvas, ctx);
+   }
+   const clearRect = () => {
+    ctx.clearRect(0,0,1900,1000)
+    set_redo([])
+    localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
+    
+
+   }
 
     return(
         
@@ -215,15 +245,14 @@ const Board = () => {
                    <button className = 'eraser' id="pencil" onClick={pencil}>
                       pencil
                    </button>
-                   <button className = 'eraser' id="undo" onClick={()=>{
-                       undo(canvas, ctx);
-                   }}>
+                   <button className = 'eraser' id="undo" onClick={callundo}>
                       undo
                    </button>
-                   <button className = 'eraser' id="redo" onClick={()=>{
-                        redo(canvas, ctx);
-                   }}>
+                   <button className = 'eraser' id="redo" onClick={callredo}>
                       redo
+                   </button>
+                   <button className = 'eraser' id="redo" onClick={clearRect}>
+                     Clear
                    </button>
                    <button className = 'eraser' onClick={rectangle}>
                       rectangle
