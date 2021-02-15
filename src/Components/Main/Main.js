@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import  './style.css'
+import NewPages from '../Features/pages/Newpages.js'
 
 const Board = () => {
     const Colors = ['black','blue','red','green','yellow']
@@ -11,6 +12,7 @@ const Board = () => {
     const  [redo_list,set_redo] = useState([])
     const  [undo_list,set_undo] = useState([])
     const [state,setstate] = useState('pencil')
+  
 
     useEffect(()=>{
         features1 = document.getElementsByClassName("penciloptions")[0].style;
@@ -29,9 +31,7 @@ const Board = () => {
           ctx.drawImage(imageObj,0,0,1300, 900, 0, 0, 1300, 900);
           }
          set_redo([])
-        //  var prevUndo = JSON.parse(localStorage.getItem("undo_list"))
-        //  set_undo([prevUndo])
-        //  console.log(prevUndo,typeof(prevUndo))
+       
         set_undo([])
          
         })
@@ -237,9 +237,9 @@ const Board = () => {
     var image = canvas.toDataURL("image/png")
         .replace("image/png", "image/octet-stream");
     download.setAttribute("href", image);
-    //download.setAttribute("download","archive.png");
+    
     }
-
+    
     return(
         
          <div className='root'>
@@ -296,6 +296,8 @@ const Board = () => {
                  </div>
                  
                </div>
+               <NewPages  canvas= {canvas} />
+              
 
             </div>
                
