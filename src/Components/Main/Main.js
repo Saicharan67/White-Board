@@ -296,7 +296,7 @@ const Board = () => {
                  </div>
                  
                </div>
-               <NewPages  canvas= {canvas} />
+               <NewPages/>
               
 
             </div>
