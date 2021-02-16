@@ -38,7 +38,7 @@ const Board = () => {
         window.addEventListener('resize',()=>{
             fixHeight(canvas)
             var prevState = JSON.parse(localStorage.getItem("Canvas"));
-            console.log(prevState)
+           
             var imageObj = new Image();
             imageObj.src = prevState
             imageObj.onload = function() {
@@ -228,6 +228,7 @@ const Board = () => {
    const clearRect = () => {
     ctx.clearRect(0,0,1900,1000)
     set_redo([])
+    set_undo([])
     localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
     
 
