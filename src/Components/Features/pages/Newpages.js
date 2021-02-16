@@ -3,7 +3,6 @@ import './style.css'
 const NewPages = (props)=>{
    var canvas,ctx
    const [currPage,setcurrPage] = useState(1)
-   const [currURL,setcurrURL] = useState('')
    const [totalpages,settotalpages] =useState(1)
    
 
@@ -17,17 +16,21 @@ const NewPages = (props)=>{
     var storedpages = JSON.parse(localStorage.getItem("Pages"))
     storedpages[currPage-1]=canvas.toDataURL()
     localStorage.setItem("Pages", JSON.stringify(storedpages))
-    ctx.clearRect(0, 0, 1500, 1000);
+    
    
    }
 
 
-   const drawpage = () => {
-    
+   const drawpage = (page) => {
+    props.settingundo([])
+    props.settingredo([])
+
+    console.log('drawpage called',page)
     var storedpages = JSON.parse(localStorage.getItem("Pages"))
+    console.log('arraylength',storedpages.length)
     var imageObj2 = new Image();
-    imageObj2.src = storedpages[currPage-1]
-    console.log('drawpage called',currPage-1,storedpages[currPage-1])
+    imageObj2.src = storedpages[page-1]
+   
     imageObj2.onload = function() {
       ctx.clearRect(0, 0, 1500, 1000);
      ctx.drawImage(imageObj2,0,0,1500, 1000, 0, 0, 1500, 1000);
@@ -41,8 +44,13 @@ const NewPages = (props)=>{
     if(currPage==1)return;
     
     savepage()
-    setcurrPage(currPage=>currPage-1)
-    drawpage()
+    
+    setcurrPage(currPage-1) 
+    
+      drawpage(currPage-1)
+  
+    
+    
   }
 
    const NextPage = () => {
@@ -50,21 +58,24 @@ const NewPages = (props)=>{
            if(totalpages==1){
            
             localStorage.setItem("Pages", JSON.stringify([canvas.toDataURL()]));
-            setcurrPage(currPage=>currPage+1)
-            settotalpages(totalpages=>totalpages+1)
+            setcurrPage(currPage+1)
+            settotalpages(totalpages+1)
             ctx.clearRect(0, 0, 1900, 1000);
            }
           else{
             savepage()
-            setcurrPage(currPage=>currPage+1)
-            settotalpages(totalpages=>totalpages+1)
+            ctx.clearRect(0, 0, 1500, 1000);
+            setcurrPage(currPage+1)
+            settotalpages(totalpages+1)
             
           }
        }
        else{
            savepage()
-           setcurrPage(currPage=>currPage+1)
-           drawpage()
+           setcurrPage(currPage+1)
+          
+            drawpage(currPage+1)
+      
        }
 
    }

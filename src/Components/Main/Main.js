@@ -297,7 +297,7 @@ const Board = () => {
                  </div>
                  
                </div>
-               <NewPages/>
+               <NewPages settingundo={set_undo} settingredo={set_redo}/>
               
 
             </div>
