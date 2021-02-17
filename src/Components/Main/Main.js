@@ -103,8 +103,8 @@ const Board = () => {
             var imageObj1 = new Image();
             imageObj1.src = restore_state
             imageObj1.onload = function() {
-             ctx.clearRect(0, 0, 1900, 1000);
-             ctx.drawImage(imageObj1,0,0,1900, 1000, 0, 0, 1900, 1000);
+             ctx.clearRect(0, 0, 1300, 900);
+             ctx.drawImage(imageObj1,0,0,1300, 900, 0, 0, 1300, 900);
             
              }
 
@@ -226,7 +226,7 @@ const Board = () => {
     redo(canvas, ctx);
    }
    const clearRect = () => {
-    ctx.clearRect(0,0,1900,1000)
+    ctx.clearRect(0,0,1300,900)
     set_redo([])
     set_undo([])
     localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
@@ -247,78 +247,71 @@ const Board = () => {
            
             <div>
                 <div  className='sidebar'>
-                   <button className = 'eraser' onClick={erase}>
-                       Earser
-                   </button>
-                   <a className="download" download="canvas.png">
-                    <button className='eraser' type="button" onClick={download}>Download</button>
-                    </a>
-                   <button className = 'eraser' id="pencil" onClick={pencil}>
-                      pencil
-                   </button>
-                   <button className = 'eraser' id="undo" onClick={callundo}>
-                      undo
-                   </button>
-                   <button className = 'eraser' id="redo" onClick={callredo}>
-                      redo
-                   </button>
-                   <button className = 'eraser' id="redo" onClick={clearRect}>
-                     Clear
-                   </button>
-                   <button className = 'eraser' onClick={rectangle}>
-                      rectangle
-                   </button>
-                   <button className = 'eraser' onClick={square}>
-                      square
-                   </button>
-                    <button className = 'eraser' onClick={Circle}>
-                    Circle
-                   </button>
+                        <button className = 'eraser' onClick={erase}>
+                            Earser
+                        </button>
+                        <a className="download" download="canvas.png">
+                            <button className='eraser' type="button" onClick={download}>Download</button>
+                            </a>
+                        <button className = 'eraser' id="pencil" onClick={pencil}>
+                            pencil
+                        </button>
+                        <button className = 'eraser' id="undo" onClick={callundo}>
+                            undo
+                        </button>
+                        <button className = 'eraser' id="redo" onClick={callredo}>
+                            redo
+                        </button>
+                        <button className = 'eraser' id="redo" onClick={clearRect}>
+                            Clear
+                        </button>
+                        <button className = 'eraser' onClick={rectangle}>
+                            rectangle
+                        </button>
+                        <button className = 'eraser' onClick={square}>
+                            square
+                        </button>
+                            <button className = 'eraser' onClick={Circle}>
+                            Circle
+                        </button>
                    
                    
                 </div>
+                <NewPages settingundo={set_undo} settingredo={set_redo}/> 
                 <div className="penciloptions">
-                 <div>
-                 {Colors.map((clr)=>{
-                      return(
-                        <button key={clr} className = 'eraser' onClick={()=>chooseColor(clr)}>
-                        {clr}
-                     </button>
-                      )
-                  })}
-                 </div>
-                 <h4>Pencil Size</h4>
-                 <div>
-                     <input type="range" min="1" max = "10" defaultValue={linewidth} value={linewidth} onChange={setline}></input>
-                 </div>
-                 <h4>Eraser Size</h4>
-                 <div>
-                     <input type="range" min="3" max = "50" defaultValue={eraserlinewidth} value={eraserlinewidth} onChange={seteraserline}></input>
-                 </div>
-                 
-               </div>
-               <NewPages settingundo={set_undo} settingredo={set_redo}/>
-              
+                        <div>
+                                {Colors.map((clr)=>{
+                                    return(
+                                        <button key={clr} className = 'eraser' onClick={()=>chooseColor(clr)}>
+                                        {clr}
+                                    </button>
+                                    )
+                                })}
+                        </div>
 
+                        <h4>Pencil Size</h4>
+
+                        <div>
+                                <input type="range" min="1" max = "10" defaultValue={linewidth} value={linewidth} onChange={setline}></input>
+                        </div>
+
+                        <h4>Eraser Size</h4>
+
+                        <div>
+                                <input type="range" min="3" max = "50" defaultValue={eraserlinewidth} value={eraserlinewidth} onChange={seteraserline}></input>
+                        </div>
+                
+                </div>
             </div>
-               
-          
+           
+            
             
             <div>
 
-            <canvas className="canvas"
-            onMouseDown={startDrawing}
-            onMouseUp={finishDrawing}
-            onMouseMove={draw}
-            >  </canvas>
+            <canvas className="canvas"  onMouseDown={startDrawing}   onMouseUp={finishDrawing}  onMouseMove={draw}> </canvas>
+     
             </div>
-                
-                
-
-              
-
-
-
+    
      </div>
                
                

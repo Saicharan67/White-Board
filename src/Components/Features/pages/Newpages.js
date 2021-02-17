@@ -32,8 +32,8 @@ const NewPages = (props)=>{
     imageObj2.src = storedpages[page-1]
    
     imageObj2.onload = function() {
-      ctx.clearRect(0, 0, 1500, 1000);
-     ctx.drawImage(imageObj2,0,0,1500, 1000, 0, 0, 1500, 1000);
+      ctx.clearRect(0, 0, 1300, 900);
+     ctx.drawImage(imageObj2,0,0,1300, 900, 0, 0, 1300, 900);
     
      }
     
@@ -47,7 +47,7 @@ const NewPages = (props)=>{
     
     setcurrPage(currPage-1) 
     
-      drawpage(currPage-1)
+    drawpage(currPage-1)
   
     
     
@@ -60,11 +60,11 @@ const NewPages = (props)=>{
             localStorage.setItem("Pages", JSON.stringify([canvas.toDataURL()]));
             setcurrPage(currPage+1)
             settotalpages(totalpages+1)
-            ctx.clearRect(0, 0, 1900, 1000);
+            ctx.clearRect(0, 0, 1300, 900);
            }
           else{
             savepage()
-            ctx.clearRect(0, 0, 1500, 1000);
+            ctx.clearRect(0, 0, 1300, 900);
             setcurrPage(currPage+1)
             settotalpages(totalpages+1)
             
@@ -79,15 +79,7 @@ const NewPages = (props)=>{
        }
 
    }
-
-
-
-
-
-
-
-
-
+   
     return(
         <div className='page'>
             <button className='eraser' onClick={PrevPage}>prev</button>
