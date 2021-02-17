@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import  './style.css'
 import NewPages from '../Features/pages/Newpages.js'
 
 const Board = () => {
     const Colors = ['black','blue','red','green','yellow']
-    let canvas,ctx,features1;
+    let ctx,features1;
+    let canvas;
     const [drawing , setdrawing] = useState(false) 
     const [color ,setcolor] = useState('black')
     const [eraserlinewidth,seteraserlinewidht]=useState('10')
@@ -13,48 +14,49 @@ const Board = () => {
     const  [undo_list,set_undo] = useState([])
     const [state,setstate] = useState('pencil')
   
-
-    useEffect(()=>{
-        features1 = document.getElementsByClassName("penciloptions")[0].style;
-       
-        canvas = document.getElementsByClassName("canvas")[0];
-        ctx  = canvas.getContext('2d')
-        
-        window.addEventListener('load',()=>{
-         fixHeight(canvas)
-         var prevState = JSON.parse(localStorage.getItem("Canvas"));
-         console.log(prevState)
-         var imageObj = new Image();
-         imageObj.src = prevState
-         imageObj.onload = function() {
-          ctx.clearRect(0, 0, 1300, 900);
-          ctx.drawImage(imageObj,0,0,1300, 900, 0, 0, 1300, 900);
-          }
-         set_redo([])
-       
-        set_undo([])
-         
-        })
-        window.addEventListener('resize',()=>{
-            fixHeight(canvas)
-            var prevState = JSON.parse(localStorage.getItem("Canvas"));
-           
-            var imageObj = new Image();
-            imageObj.src = prevState
-            imageObj.onload = function() {
-             ctx.clearRect(0, 0, 1300, 900);
-             ctx.drawImage(imageObj,0,0,1300, 900, 0, 0, 1300, 900);
-            
-             }
-        })
-       
-       
-       
-    })
     const fixHeight = (canvas) =>{
         canvas.height = window.innerHeight-5;
         canvas.width = window.innerWidth-5
     }
+    useEffect(()=>{
+        
+        features1 = document.getElementsByClassName("penciloptions")[0].style;
+        canvas = document.getElementsByClassName("canvas")[0];
+        ctx  = canvas.getContext('2d')
+        //localStorage.setItem("Canvas", JSON.stringify(canvas.toDataURL()));
+        
+    })
+    useEffect(()=>{
+        window.addEventListener('load',()=>{
+            fixHeight(canvas)
+            var prevState = JSON.parse(localStorage.getItem("Canvas"));
+            console.log(prevState)
+            var imageObj = new Image();
+            imageObj.src = prevState
+            imageObj.onload = function() {
+             ctx.clearRect(0, 0, 1900, 1000);
+             ctx.drawImage(imageObj,0,0,1900, 1000, 0, 0, 1900, 1000);
+             }
+            set_redo([])
+            set_undo([])
+            
+           })
+    },[])
+    useEffect(()=>{
+        window.addEventListener('resize',()=>{
+            fixHeight(canvas)
+            var prevState = JSON.parse(localStorage.getItem("Canvas"));
+            var imageObj = new Image();
+            imageObj.src = prevState
+            imageObj.onload = function() {
+             ctx.clearRect(0, 0, 1900, 1000);
+             ctx.drawImage(imageObj,0,0,1900, 1000, 0, 0, 1900, 1000);
+            
+             }
+        })
+
+    },[])
+
     const saveState = (canvas , list ,keep_redo) => {
         keep_redo = keep_redo || false;
         if(!keep_redo) {
@@ -103,8 +105,8 @@ const Board = () => {
             var imageObj1 = new Image();
             imageObj1.src = restore_state
             imageObj1.onload = function() {
-             ctx.clearRect(0, 0, 1300, 900);
-             ctx.drawImage(imageObj1,0,0,1300, 900, 0, 0, 1300, 900);
+             ctx.clearRect(0, 0, 1900, 1000);
+             ctx.drawImage(imageObj1,0,0,1900, 1000, 0, 0, 1900, 1000);
             
              }
 
@@ -226,7 +228,7 @@ const Board = () => {
     redo(canvas, ctx);
    }
    const clearRect = () => {
-    ctx.clearRect(0,0,1300,900)
+    ctx.clearRect(0,0,1900,1000)
     set_redo([])
     set_undo([])
     localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
@@ -308,7 +310,7 @@ const Board = () => {
             
             <div>
 
-            <canvas className="canvas"  onMouseDown={startDrawing}   onMouseUp={finishDrawing}  onMouseMove={draw}> </canvas>
+            <canvas  ref={canvas}  className="canvas"  onMouseDown={startDrawing}   onMouseUp={finishDrawing}  onMouseMove={draw}> </canvas>
      
             </div>
     
