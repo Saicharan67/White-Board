@@ -30,16 +30,17 @@ const Board = () => {
         window.addEventListener('load',()=>{
             console.log(JSON.parse(localStorage.getItem("Pages"))?JSON.parse(localStorage.getItem("Pages")).length:'notcame')
             fixHeight(canvas)
-            var prevState = JSON.parse(localStorage.getItem("Canvas"));
-            console.log(prevState)
+            if(JSON.parse(localStorage.getItem("Pages"))){
+            var prevState = JSON.parse(localStorage.getItem("Pages"));
             var imageObj = new Image();
-            imageObj.src = prevState
+            imageObj.src = prevState[0]
             imageObj.onload = function() {
              ctx.clearRect(0, 0, 1900, 1000);
              ctx.drawImage(imageObj,0,0,1900, 1000, 0, 0, 1900, 1000);
              }
             set_redo([])
             set_undo([])
+            }
             
            })
     },[])

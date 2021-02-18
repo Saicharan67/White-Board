@@ -5,18 +5,26 @@ const NewPages = ({ settingundo,
    var canvas,ctx
    const [currPage,setcurrPage] = useState(1)
    const [totalpages,settotalpages] =useState(1)
+   useEffect(()=>{
+    if(JSON.parse(localStorage.getItem("Pages"))){
+        setcurrPage(1)
+        settotalpages( JSON.parse(localStorage.getItem("TotalPages")))
+    }
+   },[])
    
+   useEffect(()=>{
+     localStorage.setItem('TotalPages',JSON.stringify(totalpages))
+   },[totalpages])
 
    useEffect(()=>{
     canvas = document.getElementsByClassName("canvas")[0];
     ctx  = canvas.getContext('2d')
-    
-    
+
    })
    useEffect(()=>{
      settingundo([])
      settingredo([])
-     if(!drawingStatus && currPage==totalpages){
+     if(!drawingStatus && currPage==totalpages && JSON.parse(localStorage.getItem("Pages"))){
         var storedpages = JSON.parse(localStorage.getItem("Pages"))
         storedpages[currPage-1]=canvas.toDataURL()
         localStorage.setItem("Pages", JSON.stringify(storedpages))
