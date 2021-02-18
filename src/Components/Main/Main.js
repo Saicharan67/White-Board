@@ -23,11 +23,12 @@ const Board = () => {
         features1 = document.getElementsByClassName("penciloptions")[0].style;
         canvas = document.getElementsByClassName("canvas")[0];
         ctx  = canvas.getContext('2d')
-        //localStorage.setItem("Canvas", JSON.stringify(canvas.toDataURL()));
+       
         
     })
     useEffect(()=>{
         window.addEventListener('load',()=>{
+            //console.log(JSON.parse(localStorage.getItem("Pages"))?JSON.parse(localStorage.getItem("Pages")).length:'notcame')
             fixHeight(canvas)
             var prevState = JSON.parse(localStorage.getItem("Canvas"));
             console.log(prevState)

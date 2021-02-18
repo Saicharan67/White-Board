@@ -9,9 +9,14 @@ const NewPages = (props)=>{
    useEffect(()=>{
     canvas = document.getElementsByClassName("canvas")[0];
     ctx  = canvas.getContext('2d')
-    // localStorage.setItem("Canvas", JSON.stringify(canvas.toDataURL()));
+    
+    
    })
-
+//    useEffect(()=>{
+//      if(!props.drawingStatus && currPage==totalpages){
+//             console.log(currPage)
+//      }
+//    },[props.drawingStatus])
 
    const savepage = () => {
     var storedpages = JSON.parse(localStorage.getItem("Pages"))
@@ -22,12 +27,10 @@ const NewPages = (props)=>{
 
 
    const drawpage = (page) => {
+
     props.settingundo([])
     props.settingredo([])
-
-    // console.log('drawpage called',page)
     var storedpages = JSON.parse(localStorage.getItem("Pages"))
-   // console.log('arraylength',storedpages.length)
     var imageObj2 = new Image();
     imageObj2.src = storedpages[page-1]
     imageObj2.onload = function() {
@@ -36,6 +39,7 @@ const NewPages = (props)=>{
         ctx.drawImage(imageObj2,0,0,1900, 1000, 0, 0, 1900, 1000);
         
      }
+
    }
    const PrevPage = () => {
     if(currPage==1)return;
