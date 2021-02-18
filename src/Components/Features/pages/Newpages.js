@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './style.css'
-const NewPages = (props)=>{
+const NewPages = ({ settingundo,
+    settingredo,drawingStatus})=>{
    var canvas,ctx
    const [currPage,setcurrPage] = useState(1)
    const [totalpages,settotalpages] =useState(1)
@@ -12,11 +13,16 @@ const NewPages = (props)=>{
     
     
    })
-//    useEffect(()=>{
-//      if(!props.drawingStatus && currPage==totalpages){
-//             console.log(currPage)
-//      }
-//    },[props.drawingStatus])
+   useEffect(()=>{
+     settingundo([])
+     settingredo([])
+     if(!drawingStatus && currPage==totalpages){
+        var storedpages = JSON.parse(localStorage.getItem("Pages"))
+        storedpages[currPage-1]=canvas.toDataURL()
+        localStorage.setItem("Pages", JSON.stringify(storedpages))
+            
+     }
+   },[currPage,drawingStatus])
 
    const savepage = () => {
     var storedpages = JSON.parse(localStorage.getItem("Pages"))
@@ -28,8 +34,7 @@ const NewPages = (props)=>{
 
    const drawpage = (page) => {
 
-    props.settingundo([])
-    props.settingredo([])
+   
     var storedpages = JSON.parse(localStorage.getItem("Pages"))
     var imageObj2 = new Image();
     imageObj2.src = storedpages[page-1]

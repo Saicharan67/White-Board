@@ -28,7 +28,7 @@ const Board = () => {
     })
     useEffect(()=>{
         window.addEventListener('load',()=>{
-            //console.log(JSON.parse(localStorage.getItem("Pages"))?JSON.parse(localStorage.getItem("Pages")).length:'notcame')
+            console.log(JSON.parse(localStorage.getItem("Pages"))?JSON.parse(localStorage.getItem("Pages")).length:'notcame')
             fixHeight(canvas)
             var prevState = JSON.parse(localStorage.getItem("Canvas"));
             console.log(prevState)
