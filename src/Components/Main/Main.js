@@ -34,6 +34,7 @@ const Board = () => {
             var prevState = JSON.parse(localStorage.getItem("Pages"));
             var imageObj = new Image();
             imageObj.src = prevState[0]
+            console.log(prevState[0],prevState[1])
             imageObj.onload = function() {
              ctx.clearRect(0, 0, 1900, 1000);
              ctx.drawImage(imageObj,0,0,1900, 1000, 0, 0, 1900, 1000);
@@ -47,14 +48,7 @@ const Board = () => {
     useEffect(()=>{
         window.addEventListener('resize',()=>{
             fixHeight(canvas)
-            var prevState = JSON.parse(localStorage.getItem("Canvas"));
-            var imageObj = new Image();
-            imageObj.src = prevState
-            imageObj.onload = function() {
-             ctx.clearRect(0, 0, 1900, 1000);
-             ctx.drawImage(imageObj,0,0,1900, 1000, 0, 0, 1900, 1000);
-            
-             }
+            window.location.reload()
         })
 
     },[])
@@ -142,7 +136,7 @@ const Board = () => {
     const finishDrawing = () => {
         setdrawing(false)
         ctx.beginPath()
-       // localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
+        localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
         
     }
     
@@ -234,7 +228,7 @@ const Board = () => {
     ctx.clearRect(0,0,1900,1000)
     set_redo([])
     set_undo([])
-   // localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
+    localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
    }
 
    const download = () => {
@@ -279,7 +273,7 @@ const Board = () => {
                    
                    
                 </div>
-                <NewPages settingundo={set_undo} settingredo={set_redo}/> 
+                <NewPages settingundo={set_undo} settingredo={set_redo}  drawingStatus={drawing}/> 
                 <div className="penciloptions">
                         <div>
                                 {Colors.map((clr)=>{
