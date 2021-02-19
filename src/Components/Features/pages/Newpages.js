@@ -40,11 +40,16 @@ const NewPages = ({ settingundo,
    // UseEffect to update the page for every change
    useEffect(()=>{
   
-     if(!drawingStatus && flag && JSON.parse(localStorage.getItem("Pages"))){
+     if(!drawingStatus && flag ){
+       if(JSON.parse(localStorage.getItem("Pages"))){
         console.log(currPage)
         var storedpages = JSON.parse(localStorage.getItem("Pages"))
         storedpages[currPage-1]=canvas.toDataURL()
         localStorage.setItem("Pages", JSON.stringify(storedpages))
+       }
+       else{
+        localStorage.setItem("Pages", JSON.stringify([canvas.toDataURL()]));
+       }
             
      }
      if(!flag){setflag(true)}
@@ -109,6 +114,12 @@ const NewPages = ({ settingundo,
        }
 
    }
+   const DeletePage = () => {
+     console.log(currPage)
+     if(currPage==1){
+     
+     }
+   }
 
     return(
         <div className='page'>
@@ -118,6 +129,7 @@ const NewPages = ({ settingundo,
 
             </div>
             <button className='eraser' onClick={NextPage}>next</button>
+            <button className='eraser' onClick={DeletePage}>Del</button>
        </div>
     )
 }
