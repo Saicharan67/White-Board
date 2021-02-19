@@ -10,8 +10,8 @@ const Board = () => {
     const [color ,setcolor] = useState('black')
     const [eraserlinewidth,seteraserlinewidht]=useState('10')
     const [linewidth,setlinewidth] = useState(2)
-    const  [redo_list,set_redo] = useState([])
-    const  [undo_list,set_undo] = useState([])
+    const [redo_list,set_redo] = useState([])
+    const [undo_list,set_undo] = useState([])
     const [state,setstate] = useState('pencil')
   
     const fixHeight = (canvas) =>{
@@ -142,7 +142,7 @@ const Board = () => {
     const finishDrawing = () => {
         setdrawing(false)
         ctx.beginPath()
-        localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
+       // localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
         
     }
     
@@ -211,44 +211,42 @@ const Board = () => {
    }
 
    const chooseColor = (clr) => {
+         setcolor(clr)     
+   } 
 
-         setcolor(clr)
-      
+   const setline = (e) => {     
+       setlinewidth(e.target.value)  
    } 
-   const setline = (e) => {
-      
-       setlinewidth(e.target.value)
-      
-   } 
+
    const seteraserline = (e) => {
        seteraserlinewidht(e.target.value)
    }
+
    const callundo = ()=>{
     undo(canvas, ctx);
    }
+
    const callredo = ()=>{
     redo(canvas, ctx);
    }
+
    const clearRect = () => {
     ctx.clearRect(0,0,1900,1000)
     set_redo([])
     set_undo([])
-    localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
-    
-
+   // localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
    }
+
    const download = () => {
     var download = document.getElementsByClassName("download")[0];
     var image = canvas.toDataURL("image/png")
         .replace("image/png", "image/octet-stream");
-    download.setAttribute("href", image);
-    
+        download.setAttribute("href", image);   
     }
     
     return(
         
          <div className='root'>
-           
             <div>
                 <div  className='sidebar'>
                         <button className = 'eraser' onClick={erase}>
