@@ -114,10 +114,28 @@ const NewPages = ({ settingundo,
        }
 
    }
+
+   // fnx to del the page 
    const DeletePage = () => {
      console.log(currPage)
      if(currPage==1){
-     
+      NextPage()
+      setcurrPage(currPage=>currPage-1)
+      settotalpages(totalpages=>totalpages-1)
+      const [firstelement,...rest]= JSON.parse(localStorage.getItem("Pages"))
+      // console.log(firstelement,rest)
+      localStorage.setItem("Pages", JSON.stringify(rest))
+     }
+     else{
+       const TempPageNumber = currPage;
+       const storedpages = JSON.parse(localStorage.getItem("Pages"));
+       PrevPage()
+       settotalpages(totalpages=>totalpages-1)
+       storedpages.pop(TempPageNumber-1)
+       localStorage.setItem("Pages", JSON.stringify(storedpages))
+
+
+
      }
    }
 
