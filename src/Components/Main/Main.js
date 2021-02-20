@@ -4,8 +4,6 @@ import NewPages from '../Features/pages/Newpages.js'
 
 const Board = () => {
     const Colors = ['black','blue','red','green','yellow']
-    let ctx,features1;
-    let canvas;
     const [drawing , setdrawing] = useState(false) 
     const [color ,setcolor] = useState('black')
     const [eraserlinewidth,seteraserlinewidht]=useState('10')
@@ -13,18 +11,17 @@ const Board = () => {
     const [redo_list,set_redo] = useState([])
     const [undo_list,set_undo] = useState([])
     const [state,setstate] = useState('pencil')
-  
+    let  canvas ;
+    let ctx ;
     const fixHeight = (canvas) =>{
         canvas.height = window.innerHeight-5;
         canvas.width = window.innerWidth-5
     }
     useEffect(()=>{
-        
-        features1 = document.getElementsByClassName("penciloptions")[0].style;
+       
         canvas = document.getElementsByClassName("canvas")[0];
         ctx  = canvas.getContext('2d')
-       
-        
+     
     })
     useEffect(()=>{
         window.addEventListener('load',()=>{
@@ -304,7 +301,7 @@ const Board = () => {
             
             <div>
 
-            <canvas  ref={canvas}  className="canvas"  onMouseDown={startDrawing}   onMouseUp={finishDrawing}  onMouseMove={draw}> </canvas>
+            <canvas ref={canvas}   className="canvas"  onMouseDown={startDrawing}   onMouseUp={finishDrawing}  onMouseMove={draw}> </canvas>
      
             </div>
     
