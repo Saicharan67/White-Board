@@ -41,14 +41,19 @@ const Board = () => {
             }
             
            })
-    },[])
-    useEffect(()=>{
         window.addEventListener('resize',()=>{
             fixHeight(canvas)
             window.location.reload()
+           })
+        window.addEventListener('keydown',function(event){
+             if( event.key=='z' && event.ctrlKey){
+             console.log('came')
+              undo(canvas,ctx)
+             }
         })
 
     },[])
+
 
     const saveState = (canvas , list ,keep_redo) => {
         keep_redo = keep_redo || false;

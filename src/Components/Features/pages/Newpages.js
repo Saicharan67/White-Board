@@ -42,7 +42,7 @@ const NewPages = ({ settingundo,
   
      if(!drawingStatus && flag ){
        if(JSON.parse(localStorage.getItem("Pages"))){
-        console.log(currPage)
+       // console.log(currPage)
         var storedpages = JSON.parse(localStorage.getItem("Pages"))
         storedpages[currPage-1]=canvas.toDataURL()
         localStorage.setItem("Pages", JSON.stringify(storedpages))
