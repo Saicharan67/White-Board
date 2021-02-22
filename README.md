@@ -1,5 +1,5 @@
 ## White-Board
-This is a Project to develope a Simple and User Friendly White-Board to use Online.. which contains features like undo and redo
+This is a Project to develope a Simple and User Friendly White-Board with all freaking feautres to use Online.. which contains features like undo and redo
 
 
 # Getting Started with Create React App
