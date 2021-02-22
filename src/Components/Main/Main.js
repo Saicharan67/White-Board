@@ -53,7 +53,7 @@ const Board = () => {
         })
 
     },[])
-
+  
 
     const saveState = (canvas , list ,keep_redo) => {
         keep_redo = keep_redo || false;
@@ -275,7 +275,7 @@ const Board = () => {
                    
                    
                 </div>
-                <NewPages settingundo={set_undo} settingredo={set_redo}  drawingStatus={drawing}/> 
+                <NewPages settingundo={set_undo} settingredo={set_redo}  drawingStatus={drawing}  undolist={undo_list}/> 
                 <div className="penciloptions">
                         <div>
                                 {Colors.map((clr)=>{

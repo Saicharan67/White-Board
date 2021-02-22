@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './style.css'
 const NewPages = ({ settingundo,
-    settingredo,drawingStatus})=>{
+    settingredo,drawingStatus,undolist})=>{
    var canvas,ctx
    const [currPage,setcurrPage] = useState(1)
    const [totalpages,settotalpages] =useState(1)
