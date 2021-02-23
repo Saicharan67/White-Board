@@ -10,6 +10,7 @@ const Board = () => {
     const [linewidth,setlinewidth] = useState(2)
     const [redo_list,set_redo] = useState([])
     const [undo_list,set_undo] = useState([])
+    const [flag,setflag] = useState(0)
     const [state,setstate] = useState('pencil')
     let  canvas ;
     let ctx ;
@@ -31,13 +32,14 @@ const Board = () => {
             var prevState = JSON.parse(localStorage.getItem("Pages"));
             var imageObj = new Image();
             imageObj.src = prevState[0]
-            console.log(prevState[0],prevState[1])
+            console.log(prevState[0])
             imageObj.onload = function() {
              ctx.clearRect(0, 0, 1900, 1000);
              ctx.drawImage(imageObj,0,0,1900, 1000, 0, 0, 1900, 1000);
              }
             set_redo([])
             set_undo([])
+            setflag(1)
             }
             
            })
@@ -75,7 +77,9 @@ const Board = () => {
     }
 
     const undo = (canvas , ctx) => {
+       
         restoreState(canvas, ctx, {name:'undo',list:undo_list}, {name:'redo',list:redo_list});
+        
     }
    
 
@@ -138,7 +142,7 @@ const Board = () => {
     const finishDrawing = () => {
         setdrawing(false)
         ctx.beginPath()
-        localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
+       // localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
         
     }
     
@@ -230,7 +234,8 @@ const Board = () => {
     ctx.clearRect(0,0,1900,1000)
     set_redo([])
     set_undo([])
-    localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
+   
+    //localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
    }
 
    const download = () => {
@@ -275,7 +280,7 @@ const Board = () => {
                    
                    
                 </div>
-                <NewPages settingundo={set_undo} settingredo={set_redo}  drawingStatus={drawing}  undolist={undo_list}/> 
+                <NewPages settingundo={set_undo} settingredo={set_redo}  drawingStatus={drawing}  flag={flag}/> 
                 <div className="penciloptions">
                         <div>
                                 {Colors.map((clr)=>{

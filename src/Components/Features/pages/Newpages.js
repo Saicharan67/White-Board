@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './style.css'
 const NewPages = ({ settingundo,
-    settingredo,drawingStatus,undolist})=>{
+    settingredo,drawingStatus,flag})=>{
    var canvas,ctx
    const [currPage,setcurrPage] = useState(1)
    const [totalpages,settotalpages] =useState(1)
-   const [flag,setflag] = useState(false)
+  
+
 
    // useEffect to check previous storage exits and if then renders it
    useEffect(()=>{
     if(JSON.parse(localStorage.getItem("Pages"))){
         setcurrPage(1)
         settotalpages( JSON.parse(localStorage.getItem("TotalPages")))
-       // drawpage(1)
+      
       
     }
    },[])
@@ -39,12 +40,15 @@ const NewPages = ({ settingundo,
 
    // UseEffect to update the page for every change
    useEffect(()=>{
-  
-     if(!drawingStatus && flag ){
+   
+     if(!drawingStatus && flag){
+       console.log(flag)
        if(JSON.parse(localStorage.getItem("Pages"))){
-       // console.log(currPage)
+        console.log('currpage',currPage)
         var storedpages = JSON.parse(localStorage.getItem("Pages"))
+    
         storedpages[currPage-1]=canvas.toDataURL()
+    
         localStorage.setItem("Pages", JSON.stringify(storedpages))
        }
        else{
@@ -52,7 +56,7 @@ const NewPages = ({ settingundo,
        }
             
      }
-     if(!flag){setflag(true)}
+    
    
    },[drawingStatus])
 
