@@ -46,6 +46,7 @@ const NewPages = ({ settingundo,
        if(JSON.parse(localStorage.getItem("Pages"))){
         console.log('currpage',currPage)
         var storedpages = JSON.parse(localStorage.getItem("Pages"))
+        console.log(storedpages[0])
     
         storedpages[currPage-1]=canvas.toDataURL()
     
@@ -59,8 +60,7 @@ const NewPages = ({ settingundo,
     
    
    },[drawingStatus])
-
-
+  
    // fnx to save the page 
    const savepage = () => {
     var storedpages = JSON.parse(localStorage.getItem("Pages"))

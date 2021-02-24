@@ -122,7 +122,7 @@ const Board = () => {
         ctx.lineWidth = state!='pencil'?eraserlinewidth:linewidth;
         ctx.lineCap = 'round'
         ctx.strokeStyle=state!='pencil'?'white':color
-        ctx.lineTo(e.clientX,e.clientY)
+        ctx.lineTo(e.clientX+1,e.clientY)
         ctx.stroke()
         ctx.beginPath()
         ctx.moveTo(e.clientX,e.clientY)
@@ -311,7 +311,7 @@ const Board = () => {
             
             <div>
 
-            <canvas ref={canvas}   className="canvas"  onMouseDown={startDrawing}   onMouseUp={finishDrawing}  onMouseMove={draw}> </canvas>
+            <canvas ref={canvas}  height={window.innerHeight-5} width={window.innerWidth-5} className="canvas"  onMouseDown={startDrawing}   onMouseUp={finishDrawing}  onMouseMove={draw}> </canvas>
      
             </div>
     
