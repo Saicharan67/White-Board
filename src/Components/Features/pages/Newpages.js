@@ -46,7 +46,7 @@ const NewPages = ({ settingundo,
        if(JSON.parse(localStorage.getItem("Pages"))){
         console.log('currpage',currPage)
         var storedpages = JSON.parse(localStorage.getItem("Pages"))
-        console.log(storedpages[0])
+        //console.log(storedpages[0])
     
         storedpages[currPage-1]=canvas.toDataURL()
     
