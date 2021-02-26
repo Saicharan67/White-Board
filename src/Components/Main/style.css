@@ -8,7 +8,7 @@
   margin-top: 5rem;
   margin-left: 1rem;
   width: 5rem;
-  height: 17rem;
+  height: 22rem;
   background-color: rgb(2, 2, 2);
   position: absolute;
 }
@@ -18,7 +18,7 @@
   flex-direction: row;
   z-index: 10;
   margin-left: 1rem;
-  margin-top: 22rem;
+  margin-top: 28rem;
   width: 5rem;
   height: 15rem;
   background-color: rgb(218, 210, 210);
@@ -37,6 +37,11 @@
   position: absolute;
   border: 2px solid rgb(255, 255, 255);
   cursor: crosshair;
+}
+.inputrange {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 button {
   width: 20px;

@@ -136,14 +136,12 @@ const Board = () => {
         console.log(canvas)
         localStorage.setItem("undo_list", JSON.stringify(undo_list));
         draw(evt)
-       
-    
+
     }
     const finishDrawing = () => {
         setdrawing(false)
         ctx.beginPath()
-       // localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
-        
+       // localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));   
     }
     
    const erase = (e) => {
@@ -209,7 +207,38 @@ const Board = () => {
     },{once:true})
     
    }
+   const insertText = () => {
+       setdrawing(false)
+       var mouseX = 0
+       var mouseY = 0;
+       var startingX = 0;
 
+       document.addEventListener("click",function(e){
+               mouseX = e.clientX;
+               startingX=mouseX
+               mouseY = e.clientY;
+
+               return false
+
+       },false)
+
+       document.addEventListener("keydown",(e)=>{
+           ctx.font = "16px Arial"
+           if(e.key=="Enter"){
+               mouseX=startingX;
+               mouseY+=20
+           }
+           else if(e.keyCode===8){
+            undo(canvas,ctx)
+            mouseX-=ctx.measureText(e.key).width;
+          }else{
+            ctx.fillText(e.key,mouseX,mouseY)
+            saveState(canvas)
+            mouseX+=ctx.measureText(e.key).width;
+          }
+           
+       },false)
+   }
    const chooseColor = (clr) => {
          setcolor(clr)     
    } 
@@ -259,6 +288,9 @@ const Board = () => {
                         <button className = 'eraser' id="pencil" onClick={pencil}>
                             pencil
                         </button>
+                        <button className = 'eraser' id="undo" onClick={insertText}>
+                            Text
+                        </button>
                         <button className = 'eraser' id="undo" onClick={callundo}>
                             undo
                         </button>
@@ -282,7 +314,7 @@ const Board = () => {
                 </div>
                 <NewPages settingundo={set_undo} settingredo={set_redo}  drawingStatus={drawing}  flag={flag}/> 
                 <div className="penciloptions">
-                        <div>
+                        {/* <div>
                                 {Colors.map((clr)=>{
                                     return(
                                         <button key={clr} className = 'eraser' onClick={()=>chooseColor(clr)}>
@@ -290,20 +322,22 @@ const Board = () => {
                                     </button>
                                     )
                                 })}
+                        </div> */}
+                        <div className="inputrange">
+                           <h4>Pencil Size</h4>
+
+                            <div>
+                                    <input type="range" min="1" max = "10" defaultValue={linewidth} value={linewidth} onChange={setline}></input>
+                            </div>
                         </div>
 
-                        <h4>Pencil Size</h4>
+                        <div className="inputrange">
+                            <h4>Eraser Size</h4>
 
-                        <div>
-                                <input type="range" min="1" max = "10" defaultValue={linewidth} value={linewidth} onChange={setline}></input>
+                            <div>
+                                    <input type="range" min="3" max = "50" defaultValue={eraserlinewidth} value={eraserlinewidth} onChange={seteraserline}></input>
+                            </div>
                         </div>
-
-                        <h4>Eraser Size</h4>
-
-                        <div>
-                                <input type="range" min="3" max = "50" defaultValue={eraserlinewidth} value={eraserlinewidth} onChange={seteraserline}></input>
-                        </div>
-                
                 </div>
             </div>
            
