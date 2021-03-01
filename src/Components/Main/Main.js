@@ -223,7 +223,7 @@ const Board = () => {
        },false)
 
        document.addEventListener("keydown",(e)=>{
-           ctx.font = "16px Arial"
+           ctx.font = "30px Times New Roman"
            if(e.key=="Enter"){
                mouseX=startingX;
                mouseY+=20
