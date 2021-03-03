@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import  './style.css'
 import NewPages from '../Features/pages/Newpages.js'
+import Rectangle from '../Features/Shapes/Rect';
 
 const Board = () => {
     const Colors = ['black','blue','red','green','yellow']
@@ -344,7 +345,7 @@ const Board = () => {
             
             
             <div>
-
+            {/* <Rectangle/> */}
             <canvas ref={canvas}  height={window.innerHeight-5} width={window.innerWidth-5} className="canvas"  onMouseDown={startDrawing}   onMouseUp={finishDrawing}  onMouseMove={draw}> </canvas>
      
             </div>
