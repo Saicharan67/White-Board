@@ -346,7 +346,7 @@ const Board = () => {
             
             <div>
             {/* <Rectangle/> */}
-            <Circle/>
+           {/* <Circle/> */}
             <canvas ref={canvas}  height={window.innerHeight-5} width={window.innerWidth-5} className="canvas"  onMouseDown={startDrawing}   onMouseUp={finishDrawing}  onMouseMove={draw}> </canvas>
      
             </div>
