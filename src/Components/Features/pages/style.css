@@ -1,9 +1,14 @@
 .page {
   z-index: 10;
-  margin-left: 45vw;
+  margin-top: 1vh;
+  margin-left: 42vw;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   position: absolute;
+  width: 15rem;
+  border-radius: 1rem;
+  padding: 0.8rem;
+  height: 4.5vh;
 }
