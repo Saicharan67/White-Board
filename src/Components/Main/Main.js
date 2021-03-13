@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './style.css'
 import NewPages from '../Features/pages/Newpages.js'
-import { IoTabletLandscapeOutline ,IoSquareOutline,IoArrowRedo,IoArrowUndo} from 'react-icons/io5';
+
 const Board = () => {
     const Colors = ['black', 'blue', 'red', 'green', 'yellow']
     const [drawing, setdrawing] = useState(false)
@@ -279,37 +279,37 @@ const Board = () => {
         <div className='root'>
             <div>
                 <div className='sidebar'>
-                    <button className='eraser' onClick={erase}>
-                    <i  className="fa fa-eraser fa-2x"></i>
+                    {/* <button className='eraser' onClick={erase}>
+                    <img src={require("../../assets/eraser.png")}> </img> 
                     </button>
                     <a className="download" download="canvas.png">
-                        <button className='eraser' type="button" onClick={download}> <i  className="fa fa-download fa-2x"></i></button>
+                        <button className='eraser' type="button" onClick={download}> <img src={require("../../assets/down-arrow.png")}> </img> </button>
                     </a>
                     <button className='eraser' id="pencil" onClick={pencil}>
-                        <i  className="fa fa-pencil fa-2x"></i>
+                    <img src={require("../../assets/pen.png")}> </img> 
                     </button>
                     <button className='eraser' id="undo" onClick={insertText}>
-                    <i  className="fa fa-font fa-2x"></i>
+                    <img src={require("../../assets/text.png")}> </img> 
                     </button>
                     <button className='eraser' id="undo" onClick={callundo}>
-                    <IoArrowUndo style={{fontSize:'1.5rem'}}/>
+                    <img src={require("../../assets/back-arrow.png")}> </img> 
                     </button>
                     <button className='eraser' id="redo" onClick={callredo}>
-                    <IoArrowRedo style={{fontSize:'1.5rem'}}/>
+                    <img src={require("../../assets/redo-arrow.png")}> </img> 
                     </button>
                     <button className='eraser' id="redo" onClick={clearRect}>
-                        Clear
+                    <img src={require("../../assets/clear.png")}> </img> 
                     </button>
                     <button className='eraser' onClick={rectangle}>
-                    <IoTabletLandscapeOutline style={{fontSize:'1.5rem'}}/>
+                    <img src={require("../../assets/rounded-rectangle.png")}> </img> 
                     </button>
                     <button className='eraser' onClick={square}>
-                   <IoSquareOutline style={{fontSize:'1.5rem'}}/>
+                    <img src={require("../../assets/rounded-square.png")}> </img> 
                     </button>
                     <button className='eraser' onClick={Circle}>
-                    <i  className="fa fa-circle fa-2x"></i>
+                    <img src={require("../../assets/circle.png")}> </img> 
                     </button>
-
+ */}
 
                 </div>
                 <NewPages settingundo={set_undo} settingredo={set_redo} drawingStatus={drawing} flag={flag} />

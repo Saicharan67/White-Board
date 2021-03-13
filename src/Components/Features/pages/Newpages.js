@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './style.css'
-import { IoCaretBackCircle,IoCaretForwardCircle,IoTrashBinSharp} from 'react-icons/io5';
+
 const NewPages = ({ settingundo,
     settingredo,drawingStatus,flag})=>{
    var canvas,ctx
@@ -146,13 +146,13 @@ const NewPages = ({ settingundo,
 
     return(
         <div className='page'>
-            <button className='eraser' onClick={PrevPage}><IoCaretBackCircle style={{fontSize:'1.5rem'}}/></button>
+            <button className='eraser' onClick={PrevPage}><img src="../../assets/previous.png"/> </button>
             <div className='pagebox'>
                 <span>{currPage}/{totalpages}</span>
 
             </div>
-            <button className='eraser' onClick={NextPage}><IoCaretForwardCircle style={{fontSize:'1.5rem'}}/></button>
-            <button className='eraser' onClick={DeletePage}><IoTrashBinSharp style={{fontSize:'1.5rem'}}/></button>
+            <button className='eraser' onClick={NextPage}><img src="../../assets/next.png"/></button>
+            <button className='eraser' onClick={DeletePage}><img src={require("../../assets/next.png")}/>  </button>
        </div>
     )
 }
