@@ -277,72 +277,45 @@ const Board = () => {
     return (
 
         <div className='root'>
-            <div>
+            <div className="options">
                 <div className='sidebar'>
-                    {/* <button className='eraser' onClick={erase}>
-                    <img src={require("../../assets/eraser.png")}> </img> 
+                    <button className='iconsbutton' onClick={erase}>
+                    <img className="icons eraser" src="./images/eraser.png"/>  
                     </button>
                     <a className="download" download="canvas.png">
-                        <button className='eraser' type="button" onClick={download}> <img src={require("../../assets/down-arrow.png")}> </img> </button>
+                        <button className='iconsbutton' type="button" onClick={download}> <img className="icons download" src="./images/download.png"/>   </button>
                     </a>
-                    <button className='eraser' id="pencil" onClick={pencil}>
-                    <img src={require("../../assets/pen.png")}> </img> 
+                    <button className='iconsbutton' id="pencil" onClick={pencil}>
+                    <img className =" icons pencil" src="./images/pen.png"/> 
                     </button>
-                    <button className='eraser' id="undo" onClick={insertText}>
-                    <img src={require("../../assets/text.png")}> </img> 
+                    <button className='iconsbutton' id="undo" onClick={insertText}>
+                    <img className="icons text" src="./images/text.png"/> 
                     </button>
-                    <button className='eraser' id="undo" onClick={callundo}>
-                    <img src={require("../../assets/back-arrow.png")}> </img> 
+                    <button className='iconsbutton' id="undo" onClick={callundo}>
+                    <img className="icons undo" src="./images/undo-arrow.png"/> 
                     </button>
-                    <button className='eraser' id="redo" onClick={callredo}>
-                    <img src={require("../../assets/redo-arrow.png")}> </img> 
+                    <button className='iconsbutton' id="redo" onClick={callredo}>
+                    <img className="icons redo" src="./images/redo-arrow.png"/> 
                     </button>
-                    <button className='eraser' id="redo" onClick={clearRect}>
-                    <img src={require("../../assets/clear.png")}> </img> 
+                    <button className='iconsbutton' id="redo" onClick={clearRect}>
+                    <img className="icons undo" src="./images/clear.png"/> 
                     </button>
-                    <button className='eraser' onClick={rectangle}>
-                    <img src={require("../../assets/rounded-rectangle.png")}> </img> 
+                    <button className='iconsbutton' onClick={rectangle}>
+                    <img className="icons rectangle" src="./images/rounded-rectangle.png"/> 
                     </button>
-                    <button className='eraser' onClick={square}>
-                    <img src={require("../../assets/rounded-square.png")}> </img> 
+                    <button className='iconsbutton' onClick={square}>
+                    <img className="icons square" src="./images/rounded-square.png"/> 
                     </button>
-                    <button className='eraser' onClick={Circle}>
-                    <img src={require("../../assets/circle.png")}> </img> 
+                    <button className='iconsbutton' onClick={Circle}>
+                    <img className="icons circle" src="./images/circle.png"/> 
                     </button>
- */}
-
                 </div>
-                <NewPages settingundo={set_undo} settingredo={set_redo} drawingStatus={drawing} flag={flag} />
+               
                 <div className="penciloptions">
-                    {/* <div>
-                                {Colors.map((clr)=>{
-                                    return(
-                                        <button key={clr} className = 'eraser' onClick={()=>chooseColor(clr)}>
-                                        {clr}
-                                    </button>
-                                    )
-                                })}
-                        </div> */}
-                    {/* <div className="inputrange">
-                           <h4>Pencil Size</h4>
-
-                            <div>
-                                    <input type="range" min="1" max = "10" defaultValue={linewidth} value={linewidth} onChange={setline}></input>
-                            </div>
-                        </div>
-
-                        <div className="inputrange">
-                            <h4>Eraser Size</h4>
-
-                            <div>
-                                    <input type="range" min="3" max = "50" defaultValue={eraserlinewidth} value={eraserlinewidth} onChange={seteraserline}></input>
-                            </div>
-                        </div> */}
+                   
                 </div>
             </div>
-
-
-
+            <NewPages settingundo={set_undo} settingredo={set_redo} drawingStatus={drawing} flag={flag} />
             <div className="test">
 
                 <canvas ref={canvas} height={window.innerHeight * 0.85} width={window.innerWidth * 0.85} className="canvas" onMouseDown={startDrawing} onMouseUp={finishDrawing} onMouseMove={draw}> </canvas>

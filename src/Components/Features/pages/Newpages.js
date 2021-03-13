@@ -146,16 +146,15 @@ const NewPages = ({ settingundo,
 
     return(
         <div className='page'>
-            <button className='eraser' onClick={PrevPage}><img src="../../assets/previous.png"/> </button>
+            <button id="newpagebuttons" className='iconsbutton' onClick={PrevPage}><img className="icons prev" src="./images/previous.png"/>  </button>
             <div className='pagebox'>
-                <span>{currPage}/{totalpages}</span>
-
+                {currPage}/{totalpages}
             </div>
-            <button className='eraser' onClick={NextPage}><img src="../../assets/next.png"/></button>
-            <button className='eraser' onClick={DeletePage}><img src={require("../../assets/next.png")}/>  </button>
+            <button id="newpagebuttons"  className='iconsbutton' onClick={NextPage}><img className="icons next" src="./images/next.png"/></button>
+            <button id="newpagebuttons" className='iconsbutton' onClick={DeletePage}><img className="icons delete" src="./images/delete.png"/>  </button>
        </div>
     )
-}
+} 
  
 
 
