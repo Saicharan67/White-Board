@@ -6,9 +6,22 @@
   justify-content: space-evenly;
   position: absolute;
   width: 15rem;
-  margin-left: 40vw;
+  margin-left: 42.5vw;
   padding: 0.8rem;
   height: 4.5vh;
+}
+.iconsbutton1 {
+  padding: 1rem;
+  color: black;
+  width: 3rem;
+  height: 3rem;
+
+  background-color: white;
+  outline: none;
+  border: none;
+}
+.iconsbutton1 :hover {
+  transform: scale(1.1, 1.1);
 }
 .pagebox {
   border: 2px solid black;

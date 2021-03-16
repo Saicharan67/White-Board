@@ -146,12 +146,12 @@ const NewPages = ({ settingundo,
 
     return(
         <div className='page'>
-            <button id="newpagebuttons" className='iconsbutton' onClick={PrevPage}><img className="icons prev" src="./images/previous.png"/>  </button>
+            <button id="newpagebuttons" className='iconsbutton1' onClick={PrevPage}><img className="icons prev" src="./images/previous.png"/>  </button>
             <div className='pagebox'>
                 {currPage}/{totalpages}
             </div>
-            <button id="newpagebuttons"  className='iconsbutton' onClick={NextPage}><img className="icons next" src="./images/next.png"/></button>
-            <button id="newpagebuttons" className='iconsbutton' onClick={DeletePage}><img className="icons delete" src="./images/delete.png"/>  </button>
+            <button id="newpagebuttons"  className='iconsbutton1' onClick={NextPage}><img className="icons next" src="./images/next.png"/></button>
+            <button id="newpagebuttons" className='iconsbutton1' onClick={DeletePage}><img className="icons delete" src="./images/delete.png"/>  </button>
        </div>
     )
 } 
