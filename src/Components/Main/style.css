@@ -2,7 +2,7 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr 8fr 2fr;
-  grid-template-rows: 2fr 7fr 1fr;
+  grid-template-rows: 1fr 7fr 1fr;
 }
 .options {
   grid-row: 2/3;

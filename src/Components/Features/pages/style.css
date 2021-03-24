@@ -1,14 +1,17 @@
 .page {
   z-index: 10;
+  height: 1rem;
+  width: 100%;
+}
+.navbar {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  position: absolute;
-  width: 15rem;
-  margin-left: 42.5vw;
-  padding: 0.8rem;
-  height: 4.5vh;
+  justify-content: center;
+  margin-left: 50vw;
+}
+.page > button {
+  margin: 8rem;
+  margin-top: 4rem;
 }
 .iconsbutton1 {
   color: black;
