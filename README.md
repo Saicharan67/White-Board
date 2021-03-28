@@ -1,8 +1,5 @@
 ## White-Board
-This is a Project to develope  Simple and User Friendly White-Board with all freaking feautres to use Online.. which contains features like undo and redo and text insertion many more features Coming soon....
-
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a Project to develope  Simple and User Friendly White-Board with all freaking feautres to use Online.. which contains features like undo and redo and text insertion many more features Coming soon..
 
 ## Available Scripts
 
