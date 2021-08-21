@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './style.css'
 
 const NewPages = ({ settingundo,
-    settingredo,drawingStatus,flag})=>{
+    settingredo,drawingStatus,flag,clear})=>{
    var canvas,ctx
    const [currPage,setcurrPage] = useState(1)
    const [totalpages,settotalpages] =useState(1)
@@ -146,16 +146,47 @@ const NewPages = ({ settingundo,
 
     return(
       
-        <div  className='page'>
-             <div  className='navbar'>
-                <button id="newpagebuttons" className='iconsbutton1' onClick={PrevPage}><img className="icons prev" src="./images/previous.png"/>  </button>
-                <div className='pagebox'>
-                    {currPage}/{totalpages}
+        <div  className='Nav'>
+             
+                <div className="top">
+                    <div className="cnt">
+                      <button className='iconsbutton1' onClick={PrevPage}>
+                          <i className={`arrow ${currPage==1?'leftInactive':'left'}`}></i>
+                      </button>
+                      <div class="content" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="46" height="36" viewBox="0 0 46 36" >
+                          <g fill="none" >
+                            <rect width="38" height="22" x="1" y="7" stroke="#3C4043" stroke-width="2" ></rect>
+                            <path fill="#5F6368" d="M8,4 L6,4 L6,0 L46,0 L46,24 L42,24 L42,22 L44,22 L44,2 L8,2 L8,4 Z" ></path>
+                            <polygon fill="#80868B" points="26 33 23 36 20 33" ></polygon>
+                          </g>
+                        </svg>
+                        <div className="text">{currPage}/{totalpages}</div>
+
+                      </div>
+                      <button   className='iconsbutton2' onClick={NextPage}>
+                          <i className="arrow right"></i>
+                      </button>
+                    </div>
                 </div>
-                <button id="newpagebuttons"  className='iconsbutton1' onClick={NextPage}><img className="icons next" src="./images/next.png"/></button>
-             </div>
-            <button id="newpagebuttons" className='iconsbutton1' onClick={DeletePage}><img className="icons delete" src="./images/delete.png"/>  </button>
-       </div>
+                <div className="bottom">
+                    <button>Undo</button>
+                    <button>Redo</button>
+                     |
+                     &nbsp;
+                    <button>Zoom</button>
+                    &nbsp;
+                     |
+                     &nbsp;
+                    <button>Set Background</button>
+                    &nbsp;
+                     |
+                    &nbsp;
+                    <button onClick={clear}>Clear Frame</button>
+
+                </div>
+            
+        </div>
        
       
     )

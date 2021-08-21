@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './style.css'
 import NewPages from '../Features/pages/Newpages.js'
+import Pencil from '../Features/Options/Pencil';
+import Eraser from '../Features/Options/Eraser';
+import Image from '../Features/Options/Image';
 
 const Board = () => {
     const Colors = ['black', 'blue', 'red', 'green', 'yellow']
@@ -22,31 +25,31 @@ const Board = () => {
 
     })
     useEffect(() => {
-        window.addEventListener('load', () => {
-            console.log(JSON.parse(localStorage.getItem("Pages")) ? JSON.parse(localStorage.getItem("Pages")).length : 'notcame')
+        // window.addEventListener('load', () => {
+        //     console.log(JSON.parse(localStorage.getItem("Pages")) ? JSON.parse(localStorage.getItem("Pages")).length : 'notcame')
            
-            if (JSON.parse(localStorage.getItem("Pages"))) {
-                var prevState = JSON.parse(localStorage.getItem("Pages"));
-                var imageObj = new Image();
-                imageObj.src = prevState[0]
-                console.log(prevState[0])
-                imageObj.onload = function () {
-                    ctx.clearRect(0, 0, 1900, 1000);
-                    ctx.drawImage(imageObj, 0, 0, 1900, 1000, 0, 0, 1900, 1000);
-                }
-                set_redo([])
-                set_undo([])
-                setflag(1)
-            }
+        //     if (JSON.parse(localStorage.getItem("Pages"))) {
+        //         var prevState = JSON.parse(localStorage.getItem("Pages"));
+        //         var imageObj = new Image();
+        //         imageObj.src = prevState[0]
+        //         console.log(prevState[0])
+        //         imageObj.onload = function () {
+        //             ctx.clearRect(0, 0, 1900, 1000);
+        //             ctx.drawImage(imageObj, 0, 0, 1900, 1000, 0, 0, 1900, 1000);
+        //         }
+        //         set_redo([])
+        //         set_undo([])
+        //         setflag(1)
+        //     }
 
-        })
+        // })
         window.addEventListener('resize', () => {
           
             window.location.reload()
         })
         window.addEventListener('keydown', function (event) {
             if (event.key == 'z' && event.ctrlKey) {
-                console.log('came')
+                
                 undo(canvas, ctx)
             }
         })
@@ -70,7 +73,7 @@ const Board = () => {
         else {
             set_undo(undo_list => [...undo_list, canvas.toDataURL()])
         }
-        console.log(undo_list.length, redo_list.length)
+        
     }
 
     const undo = (canvas, ctx) => {
@@ -276,49 +279,22 @@ const Board = () => {
 
     return (
 
-        <div className='root'>
-            <div className="options">
-                <div className='sidebar'>
-                    <button className='iconsbutton' onClick={erase}>
-                    <img className="icons eraser" src="./images/eraser.png"/>  
-                    </button>
-                    <a className="download" download="canvas.png">
-                        <button className='iconsbutton' type="button" onClick={download}> <img className="icons download" src="./images/download.png"/>   </button>
-                    </a>
-                    <button className='iconsbutton' id="pencil" onClick={pencil}>
-                    <img className =" icons pencil" src="./images/pen.png"/> 
-                    </button>
-                    <button className='iconsbutton' id="undo" onClick={insertText}>
-                    <img className="icons text" src="./images/text.png"/> 
-                    </button>
-                    <button className='iconsbutton' id="undo" onClick={callundo}>
-                    <img className="icons undo" src="./images/undo-arrow.png"/> 
-                    </button>
-                    <button className='iconsbutton' id="redo" onClick={callredo}>
-                    <img className="icons redo" src="./images/redo-arrow.png"/> 
-                    </button>
-                    <button className='iconsbutton' id="redo" onClick={clearRect}>
-                    <img className="icons undo" src="./images/clear.png"/> 
-                    </button>
-                    <button className='iconsbutton' onClick={rectangle}>
-                    <img className="icons rectangle" src="./images/rounded-rectangle.png"/> 
-                    </button>
-                    <button className='iconsbutton' onClick={square}>
-                    <img className="icons square" src="./images/rounded-square.png"/> 
-                    </button>
-                    <button className='iconsbutton' onClick={Circle}>
-                    <img className="icons circle" src="./images/circle.png"/> 
-                    </button>
-                </div>
-               
-                <div className="penciloptions">
-                   
-                </div>
+        <div className="container">
+            <div className="Navbar">
+                <NewPages settingundo={set_undo} settingredo={set_redo} drawingStatus={drawing} flag={flag} clear={clearRect}/>
             </div>
-            <NewPages settingundo={set_undo} settingredo={set_redo} drawingStatus={drawing} flag={flag} />
             <div className="test">
 
-                <canvas ref={canvas} height={window.innerHeight * 0.85} width={window.innerWidth * 0.85} className="canvas" onMouseDown={startDrawing} onMouseUp={finishDrawing} onMouseMove={draw}> </canvas>
+                <canvas ref={canvas} height={window.innerHeight * 0.8} width={window.innerWidth * 0.75} className="canvas" onMouseDown={startDrawing} onMouseUp={finishDrawing} onMouseMove={draw}> </canvas>
+
+            </div>
+
+            <div className="options">
+                <div className="Box">
+                    <Pencil/>
+                    <Eraser/>
+                    <Image/>
+                </div>
 
             </div>
 
