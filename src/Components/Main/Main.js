@@ -3,7 +3,7 @@ import './style.css'
 import NewPages from '../Features/pages/Newpages.js'
 import Pencil from '../Features/Options/Pencil';
 import Eraser from '../Features/Options/Eraser';
-import Image from '../Features/Options/Image';
+import Photo from '../Features/Options/Photo';
 
 const Board = () => {
     const Colors = ['black', 'blue', 'red', 'green', 'yellow']
@@ -25,33 +25,27 @@ const Board = () => {
 
     })
     useEffect(() => {
-        // window.addEventListener('load', () => {
-        //     console.log(JSON.parse(localStorage.getItem("Pages")) ? JSON.parse(localStorage.getItem("Pages")).length : 'notcame')
+        window.addEventListener('load', () => {
+            
            
-        //     if (JSON.parse(localStorage.getItem("Pages"))) {
-        //         var prevState = JSON.parse(localStorage.getItem("Pages"));
-        //         var imageObj = new Image();
-        //         imageObj.src = prevState[0]
-        //         console.log(prevState[0])
-        //         imageObj.onload = function () {
-        //             ctx.clearRect(0, 0, 1900, 1000);
-        //             ctx.drawImage(imageObj, 0, 0, 1900, 1000, 0, 0, 1900, 1000);
-        //         }
-        //         set_redo([])
-        //         set_undo([])
-        //         setflag(1)
-        //     }
+            if (JSON.parse(localStorage.getItem("Pages"))) {
+                var prevState = JSON.parse(localStorage.getItem("Pages"));
+                var imageObj = new Image(1900,1000);
+                imageObj.src = prevState[0]
+                console.log(prevState[0])
+                imageObj.onload = function () {
+                    ctx.clearRect(0, 0, 1900, 1000);
+                    ctx.drawImage(imageObj, 0, 0, 1900, 1000, 0, 0, 1900, 1000);
+                }
+                set_redo([])
+                set_undo([])
+                setflag(1)
+            }
 
-        // })
+        })
         window.addEventListener('resize', () => {
           
             window.location.reload()
-        })
-        window.addEventListener('keydown', function (event) {
-            if (event.key == 'z' && event.ctrlKey) {
-                
-                undo(canvas, ctx)
-            }
         })
 
     }, [])
@@ -157,91 +151,7 @@ const Board = () => {
         document.getElementsByClassName("canvas")[0].style.cursor = "crosshair"
 
     }
-    const rectangle = () => {
-        setstate('pencil')
-        let xPlace = 100;
-        let yPlace = 130;
-        document.getElementsByClassName('canvas')[0].addEventListener('click', (event) => {
-            xPlace = event.clientX-canvas.offsetLeft
-            yPlace = event.clientY-canvas.offsetTop
-            ctx.beginPath();
-            ctx.lineWidth = linewidth;
-            ctx.strokeStyle = color;
-            ctx.rect(xPlace, yPlace, 300, 150);
-            ctx.stroke();
-            ctx.beginPath();
-
-
-        }, { once: true })
-    }
-    const square = () => {
-        setstate('pencil')
-        let xPlace = 100;
-        let yPlace = 130;
-        document.getElementsByClassName('canvas')[0].addEventListener('click', (event) => {
-            xPlace = event.clientX-canvas.offsetLeft
-            yPlace = event.clientY-canvas.offsetTop
-            ctx.beginPath();
-            ctx.lineWidth = linewidth;
-            ctx.strokeStyle = color;
-            ctx.rect(xPlace, yPlace, 200, 200);
-            ctx.stroke();
-            ctx.beginPath();
-
-
-        }, { once: true })
-
-    }
-    const Circle = () => {
-        setstate('pencil')
-        let xPlace = 100;
-        let yPlace = 130;
-        document.getElementsByClassName('canvas')[0].addEventListener('click', (event) => {
-            xPlace = event.clientX-canvas.offsetLeft
-            yPlace = event.clientY-canvas.offsetTop
-
-            ctx.beginPath();
-            ctx.lineWidth = linewidth;
-            ctx.strokeStyle = color;
-            ctx.arc(xPlace, yPlace, 200, 0, 2 * Math.PI, false);
-            ctx.stroke();
-            ctx.beginPath();
-
-        }, { once: true })
-
-    }
-    const insertText = () => {
-        setdrawing(false)
-        var mouseX = 0
-        var mouseY = 0;
-        var startingX = 0;
-
-        document.addEventListener("click", function (e) {
-            mouseX = e.clientX;
-            startingX = mouseX
-            mouseY = e.clientY;
-
-            return false
-
-        }, false)
-
-        document.addEventListener("keydown", (e) => {
-            ctx.font = "30px Times New Roman"
-            if (e.key == "Enter") {
-                mouseX = startingX;
-                mouseY += 20
-            }
-            else if (e.keyCode === 8) {
-                undo(canvas, ctx)
-                mouseX -= ctx.measureText(e.key).width;
-            } else {
-                ctx.fillText(e.key, mouseX, mouseY)
-                saveState(canvas)
-                mouseX += ctx.measureText(e.key).width;
-            }
-
-        }, false)
-    }
+    
     const chooseColor = (clr) => {
         setcolor(clr)
     }
@@ -293,7 +203,7 @@ const Board = () => {
                 <div className="Box">
                     <Pencil/>
                     <Eraser/>
-                    <Image/>
+                    <Photo/>
                 </div>
 
             </div>

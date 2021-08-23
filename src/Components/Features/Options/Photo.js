@@ -1,7 +1,7 @@
 import React from 'react'
 
 import './style.css'
-const Image = (props) => {
+const Photo = (props) => {
     const isActive = true
 
     return (
@@ -13,6 +13,5 @@ const Image = (props) => {
     )
 }
 
-export default Image
+export default Photo
 
-// className={[true && 'btn',isActive?'Active':'InActive']}
