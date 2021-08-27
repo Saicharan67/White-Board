@@ -4,9 +4,10 @@ import NewPages from '../Features/pages/Newpages.js'
 import Pencil from '../Features/Options/Pencil';
 import Eraser from '../Features/Options/Eraser';
 import Photo from '../Features/Options/Photo';
+import Cursor from '../Features/Options/Cursor';
 
 const Board = () => {
-    const Colors = ['black', 'blue', 'red', 'green', 'yellow']
+    
     const [drawing, setdrawing] = useState(false)
     const [color, setcolor] = useState('black')
     const [eraserlinewidth, seteraserlinewidht] = useState('10')
@@ -15,6 +16,10 @@ const Board = () => {
     const [undo_list, set_undo] = useState([])
     const [flag, setflag] = useState(0)
     const [state, setstate] = useState('pencil')
+    const [pencilActive,setPencil] = useState(true)
+    const [eraserActive,setEraser] = useState(false)
+    const [cursorActive,setCursor] = useState(false)
+    const [photoActive,setPhoto] = useState(false)
     let canvas;
     let ctx;
 
@@ -32,7 +37,7 @@ const Board = () => {
                 var prevState = JSON.parse(localStorage.getItem("Pages"));
                 var imageObj = new Image(1900,1000);
                 imageObj.src = prevState[0]
-                console.log(prevState[0])
+            
                 imageObj.onload = function () {
                     ctx.clearRect(0, 0, 1900, 1000);
                     ctx.drawImage(imageObj, 0, 0, 1900, 1000, 0, 0, 1900, 1000);
@@ -130,7 +135,7 @@ const Board = () => {
 
         setdrawing(true)
         saveState(canvas);
-        console.log(canvas)
+       
         localStorage.setItem("undo_list", JSON.stringify(undo_list));
         draw(evt)
 
@@ -187,6 +192,35 @@ const Board = () => {
         download.setAttribute("href", image);
     }
 
+    const SettingPencil = () =>{
+        setCursor(false)
+        setEraser(false)
+        setPencil(true)
+        setPhoto(false)
+        
+    }
+    const SettingEraser = () =>{
+        setCursor(false)
+        setEraser(true)
+        setPencil(false)
+        setPhoto(false)
+        
+    }
+    const SettingPhoto = () =>{
+        setCursor(false)
+        setEraser(false)
+        setPencil(false)
+        setPhoto(true)
+        
+    }
+    const SettingCursor = () =>{
+        setCursor(true)
+        setEraser(false)
+        setPencil(false)
+        setPhoto(false)
+        
+    }
+
     return (
 
         <div className="container">
@@ -201,9 +235,10 @@ const Board = () => {
 
             <div className="options">
                 <div className="Box">
-                    <Pencil/>
-                    <Eraser/>
-                    <Photo/>
+                    <Pencil isActive={pencilActive} draw={pencil} clickHandle = {SettingPencil}/>
+                    <Eraser isActive={eraserActive} erase = {erase}  clickHandle = {SettingEraser}/>
+                    <Cursor isActive={cursorActive} clickHandle = {SettingCursor}/>
+                    <Photo  isActive={photoActive}  clickHandle = {SettingPhoto}/>
                 </div>
 
             </div>

@@ -43,7 +43,7 @@ const NewPages = ({ settingundo,
    useEffect(()=>{
    
      if(!drawingStatus && flag){
-       console.log(flag)
+      
        if(JSON.parse(localStorage.getItem("Pages"))){
         console.log('currpage',currPage)
         var storedpages = JSON.parse(localStorage.getItem("Pages"))

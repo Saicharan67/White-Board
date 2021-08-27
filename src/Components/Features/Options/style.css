@@ -2,12 +2,25 @@
   border: none;
   background-color: white;
   cursor: pointer;
-  height: 40px;
-  width: 40px;
+  height: 38px;
+  width: 38px;
   margin: 0.5rem 0.3rem;
   border-radius: 50%;
 }
 .btn:hover {
   transform: scale(1.1, 1.1);
   background-color: #f1f3f4;
+}
+.isActive {
+  border: none;
+  cursor: pointer;
+  height: 38px;
+  width: 38px;
+  margin: 0.5rem 0.3rem;
+  border-radius: 50%;
+  background-color: #3d4042;
+}
+
+.isActive:hover {
+  background-color: #484a4b;
 }
