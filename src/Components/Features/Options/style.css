@@ -2,8 +2,8 @@
   border: none;
   background-color: white;
   cursor: pointer;
-  height: 38px;
-  width: 38px;
+  height: 37px;
+  width: 37px;
   margin: 0.5rem 0.3rem;
   border-radius: 50%;
 }
@@ -14,8 +14,8 @@
 .isActive {
   border: none;
   cursor: pointer;
-  height: 38px;
-  width: 38px;
+  height: 37px;
+  width: 37px;
   margin: 0.5rem 0.3rem;
   border-radius: 50%;
   background-color: #3d4042;
