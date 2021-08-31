@@ -15,5 +15,3 @@ const Pencil = (props) => {
 }
 
 export default Pencil
-
-// className={[true && 'btn',isActive?'Active':'InActive']}

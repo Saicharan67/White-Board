@@ -17,4 +17,3 @@ const Cursor = (props) => {
 
 export default Cursor
 
-// className={[true && 'btn',isActive?'Active':'InActive']}

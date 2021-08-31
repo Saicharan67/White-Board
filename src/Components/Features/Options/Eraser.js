@@ -17,4 +17,3 @@ const Eraser = (props) => {
 
 export default Eraser
 
-// className={[true && 'btn',isActive?'Active':'InActive']}
