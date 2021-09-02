@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import './style.css'
 import NewPages from '../Features/pages/Newpages.js'
 import Pencil from '../Features/Options/Pencil';
 import Eraser from '../Features/Options/Eraser';
 import Photo from '../Features/Options/Photo';
 import Cursor from '../Features/Options/Cursor';
+import './style.css'
 
+
+import Modal from 'react-modal';
 const Board = () => {
     
     const [drawing, setdrawing] = useState(false)
@@ -27,6 +29,7 @@ const Board = () => {
 
         canvas = document.getElementsByClassName("canvas")[0];
         ctx = canvas.getContext('2d')
+        
 
     })
     useEffect(() => {
@@ -220,7 +223,7 @@ const Board = () => {
         setPhoto(false)
         
     }
-
+   
     return (
 
         <div className="container">
@@ -239,6 +242,17 @@ const Board = () => {
                     <Eraser isActive={eraserActive} erase = {erase}  clickHandle = {SettingEraser}/>
                     <Cursor isActive={cursorActive} clickHandle = {SettingCursor}/>
                     <Photo  isActive={photoActive}  clickHandle = {SettingPhoto}/>
+                    <div className="InvincibleBox">
+                        <div className="brushes">
+
+                        </div>
+                        <div className="colors">
+                            <button></button>
+                            <button></button>
+                            <button></button>
+                            <button></button>
+                        </div>
+                    </div>
                 </div>
 
             </div>
