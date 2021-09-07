@@ -7,7 +7,6 @@ import Cursor from '../Features/Options/Cursor';
 import './style.css'
 
 
-import Modal from 'react-modal';
 const Board = () => {
     
     const [drawing, setdrawing] = useState(false)

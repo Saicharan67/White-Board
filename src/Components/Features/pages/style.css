@@ -90,3 +90,43 @@
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
 }
+.HiddenTop {
+  position: absolute;
+  z-index: 100;
+  background-color: #fff;
+  height: 0%;
+  width: 100%;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 50%);
+  overflow-y: hidden;
+  transition: 0.5s;
+  display: grid;
+  grid-template-rows: 1fr 7fr 2fr;
+}
+.HiddenTop .hiddenparent {
+  grid-row: 2/3;
+}
+.HiddenTop .closebtn {
+  grid-row: 3/4;
+  display: flex;
+  place-self: center;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.closebtnchild {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  opacity: 0.54;
+  background: no-repeat
+    url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiBoZWlnaHQ9IjI0cHgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0cHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTcuNDEgMTUuNDFMMTIgMTAuODNsNC41OSA0LjU4TDE4IDE0bC02LTYtNiA2eiIvPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48L3N2Zz4=);
+}
+.closebtn:hover {
+  transition: 0.2s ease-in;
+  background-color: #f3f1f1;
+}

@@ -47,8 +47,7 @@ const NewPages = ({ settingundo,
        if(JSON.parse(localStorage.getItem("Pages"))){
         console.log('currpage',currPage)
         var storedpages = JSON.parse(localStorage.getItem("Pages"))
-        //console.log(storedpages[0])
-    
+  
         storedpages[currPage-1]=canvas.toDataURL()
     
         localStorage.setItem("Pages", JSON.stringify(storedpages))
@@ -113,8 +112,7 @@ const NewPages = ({ settingundo,
        else{
            savepage()
            setcurrPage(currPage+1)
-          
-            drawpage(currPage+1)
+           drawpage(currPage+1)
       
        }
 
@@ -143,17 +141,36 @@ const NewPages = ({ settingundo,
 
      }
    }
-
+   const expandTop = ()=>{
+     document.getElementsByClassName("HiddenTop")[0].style.height= "30%";
+   }
+   const collapsTop =  ()=> {
+    document.getElementsByClassName("HiddenTop")[0].style.height= "0%";
+   }
     return(
       
         <div  className='Nav'>
-             
+                <div className="HiddenTop">
+                  <div className="hiddenparent">
+                      {JSON.parse(localStorage.getItem("Pages")).map((page)=>{
+                        return (
+                        <div className="hiddenPages">
+
+                            
+
+                        </div>)
+                      })}
+                  </div>
+                  <div className="closebtn" onClick={collapsTop}>
+                        <div className="closebtnchild"></div>
+                  </div>
+                </div>
                 <div className="top">
                     <div className="cnt">
                       <button className='iconsbutton1' onClick={PrevPage}>
                           <i className={`arrow ${currPage==1?'leftInactive':'left'}`}></i>
                       </button>
-                      <div class="content" >
+                      <div class="content"  onClick={expandTop}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="46" height="36" viewBox="0 0 46 36" >
                           <g fill="none" >
                             <rect width="38" height="22" x="1" y="7" stroke="#3C4043" stroke-width="2" ></rect>
