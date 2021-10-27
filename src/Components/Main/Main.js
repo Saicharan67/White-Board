@@ -138,7 +138,7 @@ const Board = () => {
         setdrawing(true)
         saveState(canvas);
        
-        localStorage.setItem("undo_list", JSON.stringify(undo_list));
+        //localStorage.setItem("undo_list", JSON.stringify(undo_list));
         draw(evt)
 
     }
@@ -171,20 +171,13 @@ const Board = () => {
         seteraserlinewidht(e.target.value)
     }
 
-    const callundo = () => {
-        undo(canvas, ctx);
-    }
-
-    const callredo = () => {
-        redo(canvas, ctx);
-    }
+ 
 
     const clearRect = () => {
         ctx.clearRect(0, 0, 1900, 1000)
         set_redo([])
         set_undo([])
 
-        //localStorage.setItem("Canvas", JSON.stringify([canvas.toDataURL()]));
     }
 
     const download = () => {

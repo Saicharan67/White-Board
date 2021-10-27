@@ -45,7 +45,7 @@ const NewPages = ({ settingundo,
      if(!drawingStatus && flag){
       
        if(JSON.parse(localStorage.getItem("Pages"))){
-        console.log('currpage',currPage)
+        
         var storedpages = JSON.parse(localStorage.getItem("Pages"))
   
         storedpages[currPage-1]=canvas.toDataURL()
@@ -152,14 +152,14 @@ const NewPages = ({ settingundo,
         <div  className='Nav'>
                 <div className="HiddenTop">
                   <div className="hiddenparent">
-                      {JSON.parse(localStorage.getItem("Pages")).map((page)=>{
+                      { localStorage.getItem("Pages")? JSON.parse(localStorage.getItem("Pages")).map((page)=>{
                         return (
                         <div className="hiddenPages">
 
                             
 
                         </div>)
-                      })}
+                      }):''}
                   </div>
                   <div className="closebtn" onClick={collapsTop}>
                         <div className="closebtnchild"></div>
@@ -209,6 +209,6 @@ const NewPages = ({ settingundo,
     )
 } 
  
-
+// implement clear function in the newpage itself by clearing the page in local storage too 
 
 export default NewPages
