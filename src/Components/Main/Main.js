@@ -54,11 +54,26 @@ const Board = () => {
           
             window.location.reload()
         })
+        // window.addEventListener('keydown',(event)=>{
 
+        //     if(event.ctrlKey && event.key==='z'){
+        //         callundo()
+        //         console.log(undo_list)
+        //     }
+
+
+        // })
     }, [])
 
+    const callundo = () => {
+        undo(canvas, ctx);
+    }
 
+    const callredo = () => {
+        redo(canvas, ctx);
+    }
     const saveState = (canvas, list, keep_redo) => {
+        
         keep_redo = keep_redo || false;
         if (!keep_redo) {
             set_redo([]);
@@ -139,7 +154,7 @@ const Board = () => {
         saveState(canvas);
        
         //localStorage.setItem("undo_list", JSON.stringify(undo_list));
-        draw(evt)
+        //draw(evt)
 
     }
     const finishDrawing = () => {
@@ -159,9 +174,7 @@ const Board = () => {
 
     }
     
-    const chooseColor = (clr) => {
-        setcolor(clr)
-    }
+    
 
     const setline = (e) => {
         setlinewidth(e.target.value)
@@ -220,7 +233,7 @@ const Board = () => {
 
         <div className="container">
             <div className="Navbar">
-                <NewPages settingundo={set_undo} settingredo={set_redo} drawingStatus={drawing} flag={flag} clear={clearRect}/>
+                <NewPages settingundo={set_undo} undo={callredo} redo={callredo}settingredo={set_redo} drawingStatus={drawing} flag={flag} clear={clearRect}/>
             </div>
             <div className="test">
 

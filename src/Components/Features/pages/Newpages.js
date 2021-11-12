@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './style.css'
 
 const NewPages = ({ settingundo,
-    settingredo,drawingStatus,flag,clear})=>{
+    settingredo,undo,redo,drawingStatus,flag,clear})=>{
    var canvas,ctx
    const [currPage,setcurrPage] = useState(1)
    const [totalpages,settotalpages] =useState(1)
@@ -187,8 +187,8 @@ const NewPages = ({ settingundo,
                     </div>
                 </div>
                 <div className="bottom">
-                    <button>Undo</button>
-                    <button>Redo</button>
+                    <button >Undo</button>
+                    <button >Redo</button>
                      |
                      &nbsp;
                     <button>Zoom</button>
