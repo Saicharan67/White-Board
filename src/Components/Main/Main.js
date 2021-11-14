@@ -173,15 +173,6 @@ const Board = () => {
         document.getElementsByClassName("canvas")[0].style.cursor = "crosshair"
 
     }
-    
-    
-
-   
-
-    const seteraserline = (e) => {
-        seteraserlinewidht(e.target.value)
-    }
-
  
 
     const clearRect = () => {
