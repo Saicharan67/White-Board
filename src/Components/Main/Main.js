@@ -176,14 +176,6 @@ const Board = () => {
     
     
 
-    const setline = (e) => {
-        setlinewidth(e.target.value)
-    }
-
-    const seteraserline = (e) => {
-        seteraserlinewidht(e.target.value)
-    }
-
  
 
     const clearRect = () => {
