@@ -153,8 +153,8 @@ const Board = () => {
         setdrawing(true)
         saveState(canvas);
        
-        //localStorage.setItem("undo_list", JSON.stringify(undo_list));
-        //draw(evt)
+        localStorage.setItem("undo_list", JSON.stringify(undo_list));
+        draw(evt)
 
     }
     const finishDrawing = () => {
