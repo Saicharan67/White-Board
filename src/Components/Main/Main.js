@@ -185,12 +185,12 @@ const Board = () => {
 
     }
 
-    // const download = () => {
-    //     var download = document.getElementsByClassName("download")[0];
-    //     var image = canvas.toDataURL("image/png")
-    //         .replace("image/png", "image/octet-stream");
-    //     download.setAttribute("href", image);
-    // }
+    const download = () => {
+        var download = document.getElementsByClassName("download")[0];
+        var image = canvas.toDataURL("image/png")
+            .replace("image/png", "image/octet-stream");
+        download.setAttribute("href", image);
+    }
 
     const SettingPencil = () =>{
         setCursor(false)
